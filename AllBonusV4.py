@@ -197,7 +197,10 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
         party_lookup = {}
         log_callback(f"🏛️ Fetching {len(unique_ruling_parties)} parties... (This will take a moment)")
 
-        # Fetch parties with progress updates
+        # Fetch parties with progress updates. One failed party must not abort
+        # the whole run: degrade to neutral ethics and keep going (the run only
+        # needs ~179 small calls; a transient DNS hiccup used to kill it all).
+        failed_parties = 0
         for idx, party_id in enumerate(unique_ruling_parties, 1):
             party_data = api_call('party.getById', {'partyId': party_id})
             if party_data:
@@ -206,16 +209,17 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
                     'Party Industrialism': party_data.get('ethics', {}).get('industrialism', 0)
                 }
             else:
-                # UPDATE: Force application to return back and request API typing again
-                log_callback("❌ Error fetching party data. Connection interrupted or Invalid API Key. Please try again.")
-                done_callback()
-                return
+                failed_parties += 1
+                log_callback(f"⚠️ Party {party_id} unavailable; using neutral ethics")
             
             if idx % 20 == 0:
                 log_callback(f"   ...fetched {idx}/{len(unique_ruling_parties)} parties...")
-            
+
             # UPDATE: Shortened sleep clock to 0.1 seconds
-            time.sleep(0.1) 
+            time.sleep(0.1)
+
+        if failed_parties:
+            log_callback(f"⚠️ {failed_parties} party fetch(es) failed; those regions use neutral ethics bonus")
 
         for c_id, c_data in country_lookup.items():
             p_id = c_data['Ruling Party ID']
