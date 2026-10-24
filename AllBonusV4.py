@@ -163,6 +163,11 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
 
         log_callback("🌍 Fetching Countries...")
         countries_data = api_call('country.getAllCountries') or []
+        if not countries_data:
+            # Empty country data produced a full report of "Unknown"/30% rows
+            # that looked legitimate. A half-empty report is worse than no
+            # report: fail loudly so the caller sees the API problem.
+            raise RuntimeError("country.getAllCountries returned no data; report would be garbage")
 
         country_lookup = {}
         unique_ruling_parties = set()
@@ -220,6 +225,12 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
 
         if failed_parties:
             log_callback(f"⚠️ {failed_parties} party fetch(es) failed; those regions use neutral ethics bonus")
+        # >20% failed parties means the network was broken for the whole run:
+        # ethics bonuses would be uniformly wrong. Same policy as the countries
+        # guard above — a wrong report is worse than no report.
+        if unique_ruling_parties and failed_parties > 0.2 * len(unique_ruling_parties):
+            raise RuntimeError(
+                f"{failed_parties}/{len(unique_ruling_parties)} party fetches failed; network unreliable")
 
         for c_id, c_data in country_lookup.items():
             p_id = c_data['Ruling Party ID']
