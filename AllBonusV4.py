@@ -102,33 +102,45 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
             elif amount == 1: return 5
             else: return 5 + (0.25 * amount)
 
-        # NEW: Upgraded API caller with Auto-Retry for 429 Rate Limits
+        # One session for the whole run: keep-alive means the hostname is resolved
+        # once instead of once per call. A ~180-call burst of fresh connections
+        # made the router's DNS drop queries ("Temporary failure in name resolution").
+        session = requests.Session()
+        session.headers.update(headers)
+
+        # API caller: retries 429s and transient network errors with backoff
         def api_call(endpoint: str, params: dict = None, retries=3) -> dict:
             if params is None: params = {}
             encoded_input = urllib.parse.quote(json.dumps(params))
             url = f"{BASE_URL}/{endpoint}?input={encoded_input}"
-            
+
             for attempt in range(retries):
                 try:
-                    response = requests.get(url, headers=headers)
-                    
+                    response = session.get(url, timeout=30)
+
                     # If we get a 429 Too Many Requests, pause and retry!
                     if response.status_code == 429:
                         log_callback(f"⚠️ Server cooling down... Pausing for 2s (Retry {attempt+1}/{retries})")
                         time.sleep(2)
                         continue # Try the loop again
-                        
+
                     data = response.json()
                     if response.status_code == 200 and 'result' in data:
                         return data['result']['data']
                     else:
                         log_callback(f"⚠️ API Warning ({endpoint}): Code {response.status_code}")
                         return None
-                        
+
                 except Exception as e:
+                    # Transient network/DNS errors are worth retrying; a hard
+                    # failure after the retries still returns None.
+                    if attempt + 1 < retries:
+                        log_callback(f"⚠️ API retry {attempt+1}/{retries} ({endpoint}): {type(e).__name__}")
+                        time.sleep(1 + attempt)
+                        continue
                     log_callback(f"⚠️ API Error ({endpoint}): {e}")
                     return None
-                    
+
             # If it fails all retries, return None to trigger the hard exit
             return None
 
