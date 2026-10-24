@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+warera_api_key.txt
+extracted_countries.csv
+*.png

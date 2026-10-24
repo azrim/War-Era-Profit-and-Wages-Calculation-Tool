@@ -32,6 +32,59 @@ When you run the app, it will generate four files in the same folder:
 ## 🔒 Security & Privacy Transparency
 This application communicates directly with the official WarEra API. Your API key is **never** sent to any third-party servers. It is only saved locally on your own computer in the `warera_api_key.txt` file, so you don't have to type it in every time. Treat that text file like a password!
 
+## 🖥️ Headless / CLI mode (fork addition)
+
+No GUI, no `.exe` needed — useful for servers, cron, or piping into other scripts:
+
+```bash
+python -m venv .venv && .venv/bin/pip install -r requirements.txt   # Windows: .venv\Scripts\pip
+
+# game-calculated prices (same numbers as the GUI)
+python AllBonusV4.py --cli
+
+# execution-price mode: sell output at the order-book bid, buy inputs at the ask
+python AllBonusV4.py --cli --book
+
+# explicit key / output directory
+python AllBonusV4.py --cli --book --key wae_xxx --out ./reports
+```
+
+Key resolution order: `--key` → `warera_api_key.txt` → `~/.config/warera/api_key`.
+Running with no arguments still opens the original GUI.
+
+## 🔧 Changes in this fork
+
+* **Recipes are read from the game, not hardcoded.** The upstream `RECIPES` table
+  had to be edited by hand whenever WarEra added an item or changed a ratio, and
+  unknown items silently produced zeros. Recipes now come from
+  `gameConfig.getGameConfig()` (20 items, multi-input supported); the old table is
+  kept only as an offline fallback.
+* **`--book` pricing.** Upstream used `itemTrading.getPrices`, which is a lagging
+  game-side calculation. With `--book` the profit is computed against real order
+  book quotes (bid for goods, ask for inputs). On the same market this reads
+  ~0.6–1.8% lower than the game price — small, but it is the number you can
+  actually execute.
+* **`--cli` headless mode** with `--key`, `--book`, `--out` (details above).
+* **Fixed: `requests` was imported after first use.** It worked only because the
+  import line executed before any call; it is now a normal top-level import.
+* **Fixed: crash on an empty API response** — the CSV writer indexed
+  `combined_extracted_data[0]` unguarded and raised `IndexError`.
+* **Fixed: wrong log message** claiming chart 1 was saved as `wages_summary_chart.png`
+  when the file is `product_profitability_ranking_chart.png`.
+* **Pandas 3 deprecations removed** (`DataFrame.rename(..., inplace=True)`), so runs
+  no longer print `Pandas4Warning` on modern pandas.
+* **`requirements.txt` added** (requests, pandas, matplotlib).
+
+### Reading the CSV
+
+Each row's prices and profit belong to the product in **`Bonus Source`**, not
+`Specialisation`. They differ whenever a region's deposit beats the country's
+specialisation, and grouping by `Specialisation` then pairs a product with the
+wrong price. Also: `Country Name` is the region's *current owner*, so an occupied
+region (e.g. Kyushu held by Chile) shows the occupier, not the original country.
+`Profit per PP` is a **pre-wage gross margin**; the wage columns are a separate
+"maximum affordable wage" estimate and carry an unexplained `+10` constant.
+
 ## 📄 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 

@@ -1,9 +1,12 @@
 import os
+import sys
 import time
 import json
+import argparse
 import urllib.parse
 import csv
 import threading
+import requests
 import tkinter as tk
 from tkinter import scrolledtext, messagebox
 from datetime import datetime, timezone
@@ -21,7 +24,71 @@ BASE_URL = "https://api2.warera.io/trpc"
 # ==========================================
 # 1. CORE SCRIPT LOGIC (Runs in Background)
 # ==========================================
-def run_warera_analysis(api_key, log_callback, done_callback):
+
+def load_recipes(api_call, log_callback, fallback):
+    """Read production recipes from the live game config.
+
+    Returns {item_code_lower: {"good": code, "pp": int, "needs": {raw: qty}}}.
+    The old hardcoded table could not see new items or changed ratios, and
+    silently reported zeros for them; the API is the source of truth.
+    """
+    config = api_call('gameConfig.getGameConfig', {"json": None})
+    items = (config or {}).get('items') or {}
+    recipes = {}
+    for code, meta in items.items():
+        pp = meta.get('productionPoints')
+        if not pp or meta.get('type') not in ('product', 'raw'):
+            continue
+        recipes[code.lower()] = {
+            "good": code,
+            "pp": int(pp),
+            "needs": {raw: qty for raw, qty in (meta.get('productionNeeds') or {}).items()},
+        }
+    if recipes:
+        log_callback(f"📖 Loaded {len(recipes)} recipes from the game config")
+        return recipes
+
+    log_callback("⚠️ Could not read recipes from the API, using the built-in fallback table")
+    return {
+        key: {"good": value["good"], "pp": value["pp"],
+              "needs": {value["rm"]: value["rm_amt"]} if value["rm"] else {}}
+        for key, value in fallback.items()
+    }
+
+
+def fetch_book_prices(api_call, log_callback, item_codes):
+    """Best bid/ask per item from the order book (one call per item).
+
+    The game's own price endpoint is a lagging calculation; the book is what you
+    can actually trade against. Returns {item_code: {"bid": x, "ask": y}}.
+    """
+    prices = {}
+    for code in sorted(set(item_codes)):
+        data = api_call('tradingOrder.getTopOrders', {"itemCode": code, "limit": 1})
+        if not data:
+            continue
+        bids = data.get('bids') or data.get('buyOrders') or []
+        asks = data.get('asks') or data.get('sellOrders') or []
+        bid = float(bids[0]['price']) if bids else None
+        ask = float(asks[0]['price']) if asks else None
+        if bid or ask:
+            prices[code] = {"bid": bid, "ask": ask}
+    log_callback(f"📗 Order book quotes loaded for {len(prices)} items")
+    return prices
+
+
+def production_margin(goods_price, needs, raw_price, pp):
+    """Margin per production point, before the region bonus.
+
+    `needs` is {raw_code: qty}; `raw_price(code)` returns the price used for that
+    raw material. Kept separate from the region loop so the maths can be checked
+    without touching the API.
+    """
+    raw_cost = sum(qty * raw_price(code) for code, qty in needs.items())
+    return (goods_price - raw_cost) / pp
+
+
+def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
     try:
         headers = {
             'accept': '*/*',
@@ -65,10 +132,11 @@ def run_warera_analysis(api_key, log_callback, done_callback):
             # If it fails all retries, return None to trigger the hard exit
             return None
 
-        # --- Avoid crashing if user hasn't installed requests ---
-        import requests 
+        # requests is imported at module level (see top of file)
 
-        RECIPES = {
+        # Fallback recipe table, only used when the gameConfig endpoint is
+        # unreachable. The live table is read from the API (see load_recipes).
+        FALLBACK_RECIPES = {
             "cookedfish": {"good": "cookedFish", "rm": "fish", "rm_amt": 1, "pp": 40},
             "heavyammo": {"good": "heavyAmmo", "rm": "lead", "rm_amt": 16, "pp": 16},
             "steel": {"good": "steel", "rm": "iron", "rm_amt": 10, "pp": 10},
@@ -90,6 +158,8 @@ def run_warera_analysis(api_key, log_callback, done_callback):
             "ammo": {"good": "ammo", "rm": "lead", "rm_amt": 4, "pp": 4},
             "iron": {"good": "iron", "rm": None, "rm_amt": 0, "pp": 1}
         }
+
+        recipes = load_recipes(api_call, log_callback, FALLBACK_RECIPES)
 
         log_callback("🌍 Fetching Countries...")
         countries_data = api_call('country.getAllCountries') or []
@@ -159,6 +229,13 @@ def run_warera_analysis(api_key, log_callback, done_callback):
         log_callback("📈 Fetching live market prices...")
         live_prices = api_call('itemTrading.getPrices') or {}
 
+        book_prices = {}
+        if use_book:
+            log_callback("📗 Fetching order book quotes (bid/ask)...")
+            wanted = {r['good'] for r in recipes.values()}
+            wanted |= {raw for r in recipes.values() for raw in r['needs']}
+            book_prices = fetch_book_prices(api_call, log_callback, wanted)
+
         # --- NEW: MANUAL OVERRIDE FOR WOOD & PAPER ---
         # Replace the numbers below with the actual market prices when API endpoints is malfunctioning.
         # live_prices['wood'] = 0.078   # Example: Price of Wood
@@ -218,23 +295,33 @@ def run_warera_analysis(api_key, log_callback, done_callback):
                 total_bonus = sr_bonus + deposit_bonus if dep == spec else max(sr_bonus, deposit_bonus)
                 bonus_source = deposit if deposit_bonus > sr_bonus else original_spec
 
-            recipe = RECIPES.get(bonus_source.lower())
-            
+            recipe = recipes.get(bonus_source.lower())
+
             if recipe:
-                raw_goods_price = live_prices.get(recipe['good'], 0)
+                # Goods sell into the bid, raw materials are bought from the ask.
+                # With use_book we use real book quotes; otherwise the game price.
+                good_quote = book_prices.get(recipe['good'], {}) if use_book else {}
+                raw_goods_price = good_quote.get('bid') or live_prices.get(recipe['good'], 0)
                 price_of_goods = round(raw_goods_price, 3)
-                raw_rm_price = live_prices.get(recipe['rm'], 0) if recipe['rm'] else 0
-                price_of_rm = round(raw_rm_price, 3)
-                
-                raw_production_price = (raw_goods_price - (recipe['rm_amt'] * raw_rm_price)) / recipe['pp']
+
+                # single raw material kept for the CSV column / chart compatibility
+                first_raw = next(iter(recipe['needs']), None)
+                price_of_rm = round(live_prices.get(first_raw, 0), 3) if first_raw else 0
+
+                def _raw_price(code):
+                    quote = book_prices.get(code, {}) if use_book else {}
+                    return quote.get('ask') or live_prices.get(code, 0)
+
+                raw_production_price = production_margin(
+                    raw_goods_price, recipe['needs'], _raw_price, recipe['pp'])
                 price_of_production = round(raw_production_price, 3)
-                
+
                 raw_profit = raw_production_price * (1 + (total_bonus / 100))
                 profit_per_pp = round(raw_profit, 3)
-                
+
                 raw_old_wages = raw_production_price * (1 + ((total_bonus + 10) / 100))
                 old_workers_top_wages = round(raw_old_wages, 3)
-                
+
                 raw_top_wages = raw_old_wages * (1 - (income_tax_rate / 100))
                 top_wages_after_tax = round(raw_top_wages, 3)
             else:
@@ -255,6 +342,9 @@ def run_warera_analysis(api_key, log_callback, done_callback):
                 'Old workers top wages': old_workers_top_wages, 'Top wages after tax': top_wages_after_tax
             }
             combined_extracted_data.append(combined_row)
+
+        if not combined_extracted_data:
+            raise RuntimeError("No region data returned by the API; nothing to write.")
 
         with open('extracted_countries.csv', 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = list(combined_extracted_data[0].keys())
@@ -283,8 +373,8 @@ def run_warera_analysis(api_key, log_callback, done_callback):
         best_df['Bonus Source'] = best_df['Bonus Source'].replace(custom_names)
 
         display_df = best_df[['Bonus Source', 'Profit per PP', 'Old workers top wages', 'Top wages after tax']].copy()
-        display_df.rename(columns={'Bonus Source': 'Product', 'Old workers top wages': 'Top Gross Wages', 
-                                   'Top wages after tax': 'Top Net Wages'}, inplace=True)
+        display_df = display_df.rename(columns={'Bonus Source': 'Product', 'Old workers top wages': 'Top Gross Wages',
+                                                'Top wages after tax': 'Top Net Wages'})
 
         for col in ['Profit per PP', 'Top Gross Wages', 'Top Net Wages']:
             display_df[col] = display_df[col].apply(lambda x: f"{float(x):.3f}")
@@ -321,7 +411,7 @@ def run_warera_analysis(api_key, log_callback, done_callback):
                 else: cell.set_facecolor('white') 
 
         plt.savefig('product_profitability_ranking_chart.png', bbox_inches='tight', pad_inches=0.02, dpi=600)
-        log_callback("✅ Chart successfully generated as 'wages_summary_chart.png'!")
+        log_callback("✅ Chart successfully generated as 'product_profitability_ranking_chart.png'!")
 
         # ----------------------------------------------------
         # UPDATE: CHART GENERATION #2 (Ranked Performance Data)
@@ -350,7 +440,7 @@ def run_warera_analysis(api_key, log_callback, done_callback):
         ]].copy()
         
         # Step 4: Rename headers as specified
-        display_ranked.rename(columns={
+        display_ranked = display_ranked.rename(columns={
             'Income Tax Rate': 'Tax %',
             'Total Bonus': 'Prod Bonus',
             'Top wages after tax': 'Top Net Wages',
@@ -358,7 +448,7 @@ def run_warera_analysis(api_key, log_callback, done_callback):
             'Bonus Source': 'Product',
             'Price of Raw Material' : 'Matl',
             'Old workers top wages' : 'Top Gross Wages'
-        }, inplace=True)
+        })
         
         # Step 4: Configure precision scaling format constraints
         display_ranked['Prod Bonus'] = display_ranked['Prod Bonus'].apply(lambda x: f"{float(x):.2f}")
@@ -404,7 +494,7 @@ def run_warera_analysis(api_key, log_callback, done_callback):
                     cell.set_text_props(ha='right')
                     
         plt.savefig('regional_wages_ranking_chart.png', bbox_inches='tight', pad_inches=0.02, dpi=600)
-        log_callback("✅ Ranked chart successfully generated as 'ranked_wages_chart.png'!")
+        log_callback("✅ Ranked chart successfully generated as 'regional_wages_ranking_chart.png'!")
         log_callback("\n🎉 All processes complete. You can close this window.")
         
     except Exception as e:
@@ -507,7 +597,35 @@ class WarEraGUI:
 # ==========================================
 # 3. RUN APPLICATION
 # ==========================================
+def cli_main(argv=None):
+    """Headless mode: python AllBonusV4.py --cli [--book] [--key KEY] [--out DIR]"""
+    parser = argparse.ArgumentParser(description="WarEra profit & wages calculator (headless)")
+    parser.add_argument("--cli", action="store_true", help="run without the GUI")
+    parser.add_argument("--key", help=f"WarEra API key (default: {KEY_FILE}, then ~/.config/warera/api_key)")
+    parser.add_argument("--book", action="store_true",
+                        help="price goods at the order-book bid and inputs at the ask instead of the game price")
+    parser.add_argument("--out", default=".", help="output directory (default: current directory)")
+    args = parser.parse_args(argv)
+
+    api_key = args.key
+    if not api_key and os.path.exists(KEY_FILE):
+        api_key = open(KEY_FILE).read().strip()
+    if not api_key:
+        default_key = os.path.expanduser("~/.config/warera/api_key")
+        if os.path.exists(default_key):
+            api_key = open(default_key).read().strip()
+    if not api_key or not api_key.startswith("wae"):
+        parser.error("no API key found; pass --key or create warera_api_key.txt")
+
+    os.makedirs(args.out, exist_ok=True)
+    os.chdir(args.out)
+    run_warera_analysis(api_key, lambda msg: print(msg, flush=True), lambda: None, use_book=args.book)
+
+
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = WarEraGUI(root)
-    root.mainloop()
+    if "--cli" in sys.argv[1:]:
+        cli_main()
+    else:
+        root = tk.Tk()
+        app = WarEraGUI(root)
+        root.mainloop()
