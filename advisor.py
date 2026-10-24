@@ -63,7 +63,8 @@ def main():
     companies = [api(token, "company.getById", {"companyId": cid}) for cid in company_ids]
     assert all(c.get("user") == args.owner for c in companies), "filter ignored: not your companies"
 
-    recipes = api(token, "gameConfig.getGameConfig", {"json": None})["items"]
+    cfg = api(token, "gameConfig.getGameConfig", {"json": None})
+    recipes = cfg["items"]
     prices = load_prices(token, None)
 
     def base_margin(item):
@@ -82,7 +83,6 @@ def main():
         region_id = c["region"]
         region = api(token, "region.getById", {"regionId": region_id})
         rname = region.get("name", "?")
-        pp_day = c["production"]
 
         if rname in by_region.index:
             r = by_region.loc[rname]
@@ -97,6 +97,20 @@ def main():
 
         if profit_pp is None:
             continue
+
+        # `company.production` is NOT a rate: it is the stored production-point
+        # backlog waiting to be turned into items, capped by the storage upgrade
+        # (200 per level). Daily capacity comes from the automatedEngine upgrade
+        # (24 PP per level), which is what a per-day figure must use.
+        upgrades = cfg["upgradesConfig"]
+        engine_lv = (c.get("activeUpgradeLevels") or {}).get("automatedEngine", 1)
+        storage_lv = (c.get("activeUpgradeLevels") or {}).get("storage", 1)
+        pp_day = upgrades["automatedEngine"]["levels"][str(engine_lv)]["stats"]["dailyProd"]
+        stock = c["production"]
+        cap = upgrades["storage"]["levels"][str(storage_lv)]["stats"]["maxProduction"]
+        workers = c.get("workerCount", 0)
+        max_workers = upgrades["breakRoom"]["levels"][
+            str((c.get("activeUpgradeLevels") or {}).get("breakRoom", 1))]["stats"]["maxWorkers"]
 
         # 1) same item, best region that actually bonuses it
         same_item = by_product[(by_product["Bonus Source"] == item) & (by_product["Region Name"] != rname)]
@@ -119,6 +133,10 @@ def main():
             "bonus": bonus,
             "bonus_product": bonus_product,
             "pp_day": pp_day,
+            "stock": stock,
+            "cap": cap,
+            "workers": workers,
+            "max_workers": max_workers,
             "profit_pp": profit_pp,
             "per_day": profit_pp * pp_day,
             "move_to": None if move is None else move["Region Name"],
@@ -133,8 +151,8 @@ def main():
     total = sum(r["per_day"] for r in rows)
     print(f"table: {table_path}")
     print(f"{len(rows)} pabrik · total profit sekarang {total:.2f}/hari\n")
-    print(f"{'pabrik':<20}{'item':<11}{'region':<20}{'bonus':>6}{'profit/PP':>10}{'PP/h':>7}{'/hari':>8}"
-          f"  {'aksi':<40}{'delta/hari':>10}")
+    print(f"{'pabrik':<20}{'item':<11}{'region':<20}{'bonus':>6}{'profit/PP':>10}{'PP/hari':>9}{'/hari':>8}"
+          f"{'stok':>9}{'pekerja':>9}  {'aksi':<34}{'delta/hari':>10}")
     for r in rows:
         actions = []
         if r["move_gain_day"] > 0.005:
@@ -147,7 +165,16 @@ def main():
         gain = max(r["move_gain_day"], r["switch_gain_day"], r["best_any_gain_day"], 0.0)
         flag = "" if r["bonus_product"] == r["item"] else f" (region bonus untuk {r['bonus_product']})"
         print(f"{r['company'][:19]:<20}{r['item']:<11}{r['region'][:19]:<20}{r['bonus']:>5.0f}%"
-              f"{r['profit_pp']:>10.3f}{r['pp_day']:>7.1f}{r['per_day']:>8.2f}  {action:<40}{gain:>10.2f}{flag}")
+              f"{r['profit_pp']:>10.3f}{r['pp_day']:>9.0f}{r['per_day']:>8.2f}"
+              f"{r['stock']:>4.0f}/{r['cap']:<4.0f}{r['workers']:>4}/{r['max_workers']:<4.0f}"
+              f"  {action:<34}{gain:>10.2f}{flag}")
+
+    # production stalls when the stored backlog hits the storage cap
+    for r in rows:
+        if r["stock"] > 0.9 * r["cap"]:
+            print(f"⚠️ {r['company']}: stok produksi {r['stock']:.0f}/{r['cap']:.0f} hampir penuh — "
+                  f"produksi berhenti sampai diambil")
+
 
     best_pp = float(by_product.iloc[0]["Profit per PP"])
     best_item = str(by_product.iloc[0]["Bonus Source"])
@@ -160,6 +187,15 @@ def main():
         (recipes[best_item]["productionPoints"] or 1)
     print(f"kedalaman bid {best_item}: {bid_depth:.0f} unit · output jika semua pabrik diretool: "
           f"{would_make:.1f} unit/hari → {'aman' if would_make < bid_depth else 'PERINGATAN: melebihi bid, harga akan turun'}")
+
+    # inputs must be buyable at that scale: compare daily need with what is on sale
+    best_needs = recipes.get(best_item, {}).get("productionNeeds") or {}
+    for raw, qty in best_needs.items():
+        ask = api(token, "tradingOrder.getTopOrders", {"itemCode": raw, "limit": 100})
+        ask_depth = sum(float(o.get("quantity", 0)) for o in (ask.get("sellOrders") or []))
+        need = qty * would_make
+        print(f"  bahan {raw}: butuh {need:.0f}/hari · dijual {ask_depth:.0f} unit → "
+              f"{'cukup' if need < ask_depth else 'PERINGATAN: kebutuhan melebihi barang yang dijual'}")
 
     # raw-material position: what his factories consume vs what he produces himself
     produced = {r["item"] for r in rows}
