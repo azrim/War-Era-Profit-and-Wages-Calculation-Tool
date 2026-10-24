@@ -4,3 +4,4 @@ __pycache__/
 warera_api_key.txt
 extracted_countries.csv
 *.png
+reports/
