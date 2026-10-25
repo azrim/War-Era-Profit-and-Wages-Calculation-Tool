@@ -163,6 +163,7 @@ def main():
 
         rows.append({
             "company": c.get("name", "?"),
+            "id": c["_id"],
             "item": item,
             "region": rname,
             "bonus": bonus,
@@ -183,6 +184,10 @@ def main():
     def n(x):
         """Indonesian decimal comma, one decimal place."""
         return f"{x:.1f}".replace(".", ",")
+
+    def p(x):
+        """Per-PP figures differ in the third decimal (0.168 vs 0.164)."""
+        return f"{x:.3f}".replace(".", ",")
 
     best_item = str(by_product.iloc[0]["Bonus Source"])
     best_pp = float(by_product.iloc[0]["Profit per PP"])
@@ -217,6 +222,34 @@ def main():
     else:
         print("\nTidak ada yang perlu diubah — semua pabrik sudah di produk dan region terbaik.")
 
+    # workers: the wage is paid per production point, so it is directly
+    # comparable with the factory's gross margin per PP. A worker whose wage
+    # exceeds that margin loses money for every point they produce.
+    print("\n👷 Pekerja")
+    total_workers = 0
+    for r in rows:
+        ws = api(token, "worker.getWorkers", {"companyId": r["id"]}).get("workers") or []
+        total_workers += len(ws)
+        slots = int(r["max_workers"])
+        if not ws:
+            if r["profit_pp"] > 0:
+                print(f"• {r['company']}: 0/{slots} pekerja — masih untung menambah "
+                      f"selama upah di bawah {p(r['profit_pp'])}/PP")
+            continue
+        for w in ws:
+            wage = float(w["wage"])
+            diff = r["profit_pp"] - wage
+            fidelity = w.get("fidelity", 0)
+            if diff > 0:
+                verdict = f"pertahankan (untung {p(diff)}/PP)"
+            else:
+                verdict = (f"rugi {p(-diff)}/PP — turunkan upah ke bawah {p(r['profit_pp'])}/PP "
+                           f"atau lepas")
+            print(f"• {r['company']}: upah {p(wage)}/PP vs margin {p(r['profit_pp'])}/PP → {verdict}")
+            print(f"   fidelity {fidelity}/10 → bonus produksi +{fidelity}%"
+                  f"{'' if fidelity >= 10 else f', bisa naik ke +10%'}")
+    print(f"• Total pekerja {total_workers}; fidelity menambah produksi 1% per poin (maks 10%).")
+
     print("\n📌 Catatan")
     print(f"• Biaya ubah: pindah {cfg['company']['moveCost']} concrete, ganti produk "
           f"{cfg['company']['changeItemCost']} concrete. Dihargai {n(concrete_price)}/concrete di pasar "
@@ -242,10 +275,6 @@ def main():
         print(f"• bahan {raw}: butuh {need:.0f}/hari, dijual {ask_depth:.0f} unit — {verdict}.")
 
     # idle capacity and full storage are worth more than any product choice
-    idle = [r for r in rows if r["workers"] < r["max_workers"]]
-    if idle:
-        print(f"• Pekerja kosong: {len(idle)} pabrik punya slot pekerja belum terisi "
-              f"(kapasitas tambahan tanpa biaya ubah).")
     full = [r for r in rows if r["stock"] > 0.9 * r["cap"]]
     for r in full:
         print(f"• ⚠️ {r['company']}: stok {r['stock']:.0f}/{r['cap']:.0f} hampir penuh, produksi berhenti.")
