@@ -67,6 +67,12 @@ def main():
     recipes = cfg["items"]
     prices = load_prices(token, None)
 
+    # company move / change-item are paid in concrete (see the comment below);
+    # value it at the best ask so payback can be expressed in money.
+    cbook = api(token, "tradingOrder.getTopOrders", {"itemCode": "concrete", "limit": 20})
+    asks = sorted(float(o["price"]) for o in (cbook.get("sellOrders") or []))
+    concrete_price = asks[0] if asks else float(prices.get("concrete", 0))
+
     def base_margin(item):
         """Margin/PP with no regional bonus, using game prices."""
         meta = recipes.get(item) or {}
@@ -126,31 +132,33 @@ def main():
         # 3) best possible pair anywhere
         best_any = by_product.iloc[0]
 
-        # Costs come from gameConfig company.moveCost / company.changeItemCost
-        # (flat 5 each, so a move+retool is 10). Payback decides whether an
-        # option is worth doing at all, which a raw gain/day figure hides.
+        # Both actions are paid in CONCRETE, not money: the game's own move and
+        # change-item dialogs render `cost:{items:{concrete: company.moveCost}}`
+        # / `{concrete: company.changeItemCost}` (both 5). Convert to money with
+        # the concrete market price so payback means something.
         cost_move = float(cfg["company"]["moveCost"])
         cost_item = float(cfg["company"]["changeItemCost"])
         options = []
         if move is not None:
             options.append({
                 "label": f"pindah ke {move['Region Name']}",
-                "cost": cost_move,
+                "concrete": cost_move,
                 "gain": (float(move["Profit per PP"]) - profit_pp) * pp_day,
             })
         if switch is not None:
             options.append({
                 "label": f"ganti produk jadi {switch[0]} (tetap di {rname})",
-                "cost": cost_item,
+                "concrete": cost_item,
                 "gain": (switch[1] - profit_pp) * pp_day,
             })
         if best_any["Bonus Source"] != item or best_any["Region Name"] != rname:
             options.append({
                 "label": f"pindah ke {best_any['Region Name']} + ganti produk jadi {best_any['Bonus Source']}",
-                "cost": cost_move + cost_item,
+                "concrete": cost_move + cost_item,
                 "gain": (float(best_any["Profit per PP"]) - profit_pp) * pp_day,
             })
         for o in options:
+            o["cost"] = o["concrete"] * concrete_price
             o["payback"] = (o["cost"] / o["gain"]) if o["gain"] > 0 else float("inf")
 
         rows.append({
@@ -189,6 +197,7 @@ def main():
     change.sort(key=lambda t: -t[1]["gain"])
     after = total + sum(o["gain"] for _, o in change)
     total_cost = sum(o["cost"] for _, o in change)
+    total_concrete = sum(o["concrete"] for _, o in change)
 
     print(f"🏭 Advisor pabrik — {os.path.basename(os.path.dirname(table_path))} (harga order book)")
     print(f"Sekarang {n(total)} uang/hari dari {len(rows)} pabrik.")
@@ -199,20 +208,18 @@ def main():
             print(f"• {r['company']}: {r['item']} di {r['region']} — {n(r['per_day'])}/hari")
 
     if change:
-        print(f"\n🔧 Ubah ({len(change)} pabrik, tambah {n(sum(o['gain'] for _, o in change))}/hari, "
-              f"biaya {total_cost:.0f} uang)")
+        print(f"\n🔧 Ubah ({len(change)} pabrik, tambah {n(sum(o['gain'] for _, o in change))}/hari)")
         for r, o in change:
             print(f"• {r['company']}: {r['item']} di {r['region']} → {o['label']}")
-            print(f"   biaya {o['cost']:.0f} uang · untung +{n(o['gain'])}/hari · "
-                  f"balik modal {n(o['payback'])} hari · untung bersih 30 hari {n(o['gain'] * 30 - o['cost'])}")
+            print(f"   +{n(o['gain'])}/hari · balik modal {n(o['payback'])} hari")
         print(f"\nKalau semua diubah: {n(after)}/hari (naik {n((after / total - 1) * 100)}%).")
+        print(f"Total biaya {total_concrete:.0f} concrete (≈ {n(total_cost)} uang @ {n(concrete_price)}/concrete).")
     else:
         print("\nTidak ada yang perlu diubah — semua pabrik sudah di produk dan region terbaik.")
 
     print("\n📌 Catatan")
-    print(f"• Biaya dari config game: pindah {cfg['company']['moveCost']} uang, "
-          f"ganti produk {cfg['company']['changeItemCost']} uang (keduanya = "
-          f"{cfg['company']['moveCost'] + cfg['company']['changeItemCost']} uang).")
+    print(f"• Biaya: pindah {cfg['company']['moveCost']} concrete, ganti produk "
+          f"{cfg['company']['changeItemCost']} concrete — tanpa uang.")
 
     # market absorption for the recommended product
     book = api(token, "tradingOrder.getTopOrders", {"itemCode": best_item, "limit": 100})
