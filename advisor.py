@@ -218,8 +218,11 @@ def main():
         print("\nTidak ada yang perlu diubah — semua pabrik sudah di produk dan region terbaik.")
 
     print("\n📌 Catatan")
-    print(f"• Biaya: pindah {cfg['company']['moveCost']} concrete, ganti produk "
-          f"{cfg['company']['changeItemCost']} concrete — tanpa uang.")
+    print(f"• Biaya ubah: pindah {cfg['company']['moveCost']} concrete, ganti produk "
+          f"{cfg['company']['changeItemCost']} concrete. Dihargai {n(concrete_price)}/concrete di pasar "
+          f"→ {n(float(cfg['company']['moveCost']) * concrete_price)} uang per aksi, "
+          f"{n((float(cfg['company']['moveCost']) + float(cfg['company']['changeItemCost'])) * concrete_price)} "
+          f"uang untuk pindah + ganti produk.")
 
     # market absorption for the recommended product
     book = api(token, "tradingOrder.getTopOrders", {"itemCode": best_item, "limit": 100})
