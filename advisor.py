@@ -149,66 +149,79 @@ def main():
 
     rows.sort(key=lambda r: -r["per_day"])
     total = sum(r["per_day"] for r in rows)
-    print(f"table: {table_path}")
-    print(f"{len(rows)} pabrik · total profit sekarang {total:.2f}/hari\n")
-    print(f"{'pabrik':<20}{'item':<11}{'region':<20}{'bonus':>6}{'profit/PP':>10}{'PP/hari':>9}{'/hari':>8}"
-          f"{'stok':>9}{'pekerja':>9}  {'aksi':<34}{'delta/hari':>10}")
-    for r in rows:
-        actions = []
-        if r["move_gain_day"] > 0.005:
-            actions.append(f"pindah→{r['move_to']}")
-        if r["switch_gain_day"] > 0.005:
-            actions.append(f"ganti→{r['switch_to']}")
-        if r["best_any_gain_day"] > 0.005:
-            actions.append(f"retool→{r['best_any']}")
-        action = " + ".join(actions) if actions else "biarkan"
-        gain = max(r["move_gain_day"], r["switch_gain_day"], r["best_any_gain_day"], 0.0)
-        flag = "" if r["bonus_product"] == r["item"] else f" (region bonus untuk {r['bonus_product']})"
-        print(f"{r['company'][:19]:<20}{r['item']:<11}{r['region'][:19]:<20}{r['bonus']:>5.0f}%"
-              f"{r['profit_pp']:>10.3f}{r['pp_day']:>9.0f}{r['per_day']:>8.2f}"
-              f"{r['stock']:>4.0f}/{r['cap']:<4.0f}{r['workers']:>4}/{r['max_workers']:<4.0f}"
-              f"  {action:<34}{gain:>10.2f}{flag}")
 
-    # production stalls when the stored backlog hits the storage cap
-    for r in rows:
-        if r["stock"] > 0.9 * r["cap"]:
-            print(f"⚠️ {r['company']}: stok produksi {r['stock']:.0f}/{r['cap']:.0f} hampir penuh — "
-                  f"produksi berhenti sampai diambil")
+    def n(x):
+        """Indonesian decimal comma, one decimal place."""
+        return f"{x:.1f}".replace(".", ",")
 
-
-    best_pp = float(by_product.iloc[0]["Profit per PP"])
     best_item = str(by_product.iloc[0]["Bonus Source"])
-    print(f"\npasangan terbaik di pasar saat ini: {rows[0]['best_any']} ({best_pp:.3f}/PP)")
+    best_pp = float(by_product.iloc[0]["Profit per PP"])
 
-    # how much of that can the market absorb? profit/PP assumes you can sell.
+    keep, change = [], []
+    for r in rows:
+        gain = max(r["move_gain_day"], r["switch_gain_day"], r["best_any_gain_day"], 0.0)
+        if gain > 0.05:
+            change.append((r, gain))
+        else:
+            keep.append(r)
+    change.sort(key=lambda t: -t[1])
+    after = total + sum(g for _, g in change)
+
+    print(f"🏭 Advisor pabrik — {os.path.basename(os.path.dirname(table_path))} (harga order book)")
+    print(f"Sekarang {n(total)} uang/hari dari {len(rows)} pabrik.")
+
+    if keep:
+        print(f"\n✅ Biarkan ({len(keep)})")
+        for r in keep:
+            print(f"• {r['company']}: {r['item']} di {r['region']} — {n(r['per_day'])}/hari")
+
+    if change:
+        print(f"\n🔧 Ubah ({len(change)} pabrik, tambah {n(sum(g for _, g in change))}/hari)")
+        for r, gain in change:
+            target = r["best_any"]
+            print(f"• {r['company']}: {r['item']} di {r['region']} → {target}, +{n(gain)}/hari")
+        print(f"\nKalau semua diubah: {n(after)}/hari (naik {n((after / total - 1) * 100)}%).")
+    else:
+        print("\nTidak ada yang perlu diubah — semua pabrik sudah di produk dan region terbaik.")
+
+    print("\n📌 Catatan")
+    print("• Biaya ubah: ganti produk 5 uang, pindah region 5 uang per pabrik.")
+
+    # market absorption for the recommended product
     book = api(token, "tradingOrder.getTopOrders", {"itemCode": best_item, "limit": 100})
     bid_depth = sum(float(o.get("quantity", 0)) for o in (book.get("buyOrders") or []))
-    would_make = sum(r["pp_day"] for r in rows if r["item"] != best_item) / \
-        (recipes[best_item]["productionPoints"] or 1)
-    print(f"kedalaman bid {best_item}: {bid_depth:.0f} unit · output jika semua pabrik diretool: "
-          f"{would_make:.1f} unit/hari → {'aman' if would_make < bid_depth else 'PERINGATAN: melebihi bid, harga akan turun'}")
+    would_make = sum(r["pp_day"] for r in rows) / (recipes[best_item]["productionPoints"] or 1)
+    if would_make < bid_depth:
+        print(f"• {best_item}: pembeli siap {bid_depth:.0f} unit, produksimu {n(would_make)}/hari — aman.")
+    else:
+        print(f"• {best_item}: produksimu {n(would_make)}/hari melebihi pembeli siap {bid_depth:.0f} — harga bisa turun.")
 
-    # inputs must be buyable at that scale: compare daily need with what is on sale
     best_needs = recipes.get(best_item, {}).get("productionNeeds") or {}
     for raw, qty in best_needs.items():
         ask = api(token, "tradingOrder.getTopOrders", {"itemCode": raw, "limit": 100})
         ask_depth = sum(float(o.get("quantity", 0)) for o in (ask.get("sellOrders") or []))
         need = qty * would_make
-        print(f"  bahan {raw}: butuh {need:.0f}/hari · dijual {ask_depth:.0f} unit → "
-              f"{'cukup' if need < ask_depth else 'PERINGATAN: kebutuhan melebihi barang yang dijual'}")
+        verdict = "cukup" if need < ask_depth else "KURANG, harus cari pemasok"
+        print(f"• bahan {raw}: butuh {need:.0f}/hari, dijual {ask_depth:.0f} unit — {verdict}.")
 
-    # raw-material position: what his factories consume vs what he produces himself
+    # idle capacity and full storage are worth more than any product choice
+    idle = [r for r in rows if r["workers"] < r["max_workers"]]
+    if idle:
+        print(f"• Pekerja kosong: {len(idle)} pabrik punya slot pekerja belum terisi "
+              f"(kapasitas tambahan tanpa biaya ubah).")
+    full = [r for r in rows if r["stock"] > 0.9 * r["cap"]]
+    for r in full:
+        print(f"• ⚠️ {r['company']}: stok {r['stock']:.0f}/{r['cap']:.0f} hampir penuh, produksi berhenti.")
+
     produced = {r["item"] for r in rows}
     need = {}
     for r in rows:
         for raw, qty in (recipes.get(r["item"], {}).get("productionNeeds") or {}).items():
             need[raw] = need.get(raw, 0) + qty * r["pp_day"] / recipes[r["item"]]["productionPoints"]
-    if need:
-        print("\nbahan mentah yang dibutuhkan pabrikmu per hari:")
-        for raw, qty in sorted(need.items(), key=lambda kv: -kv[1]):
-            own = "diproduksi sendiri" if raw in produced else "TIDAK diproduksi sendiri — beli di pasar"
-            raw_pp = float(by_product[by_product["Bonus Source"] == raw]["Profit per PP"].max() or 0)
-            print(f"  {raw:<11}{qty:>8.2f}/hari  {own}  (margin tambang {raw_pp:.3f}/PP)")
+    bought = [f"{raw} {qty:.0f}/hari" for raw, qty in sorted(need.items(), key=lambda kv: -kv[1])
+              if raw not in produced]
+    if bought:
+        print(f"• Semua bahan dibeli di pasar: {', '.join(bought)} — tidak ada tambang sendiri.")
 
 
 if __name__ == "__main__":
