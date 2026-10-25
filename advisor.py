@@ -259,7 +259,11 @@ def main():
 
     # market absorption for the recommended product
     book = api(token, "tradingOrder.getTopOrders", {"itemCode": best_item, "limit": 100})
-    bid_depth = sum(float(o.get("quantity", 0)) for o in (book.get("buyOrders") or []))
+    bids = sorted(((float(o["price"]), float(o["quantity"])) for o in (book.get("buyOrders") or [])),
+                  reverse=True)
+    # only bids near the best price are really sellable; summing the whole book
+    # counts orders 20% below market as if they were buyers at market
+    bid_depth = sum(q for price, q in bids if price >= bids[0][0] * 0.98) if bids else 0
     would_make = sum(r["pp_day"] for r in rows) / (recipes[best_item]["productionPoints"] or 1)
     if would_make < bid_depth:
         print(f"• {best_item}: pembeli siap {bid_depth:.0f} unit, produksimu {n(would_make)}/hari — aman.")
