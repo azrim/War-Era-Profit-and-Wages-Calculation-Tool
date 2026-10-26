@@ -1,0 +1,3009 @@
+{
+ "companies": [
+  {
+   "name": "TB. BERKAH ABADI",
+   "itemCode": "steel",
+   "region": "6873d11594e6b3b7989a4c3b",
+   "upgrades": {
+    "storage": 3,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 1
+  },
+  {
+   "name": "PT. KERUK BUMI",
+   "itemCode": "steel",
+   "region": "6873d11594e6b3b7989a4c3e",
+   "upgrades": {
+    "storage": 4,
+    "automatedEngine": 7,
+    "breakRoom": 1
+   },
+   "workerCount": 1
+  },
+  {
+   "name": "PT. BAKAR BESI KAYA",
+   "itemCode": "steel",
+   "region": "683ddd3d36dbc90b78047457",
+   "upgrades": {
+    "storage": 4,
+    "automatedEngine": 7,
+    "breakRoom": 1
+   },
+   "workerCount": 1
+  },
+  {
+   "name": "PT. BAJA KUAT JAYA",
+   "itemCode": "steel",
+   "region": "6873d11794e6b3b7989a4cf5",
+   "upgrades": {
+    "storage": 2,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  },
+  {
+   "name": "My new company",
+   "itemCode": "steel",
+   "region": "6873d11694e6b3b7989a4cb0",
+   "upgrades": {
+    "storage": 1,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  },
+  {
+   "name": "TB. BATU GEMILANG",
+   "itemCode": "steel",
+   "region": "6873d11694e6b3b7989a4cb0",
+   "upgrades": {
+    "storage": 2,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  },
+  {
+   "name": "PT. SEDOT LEMAK",
+   "itemCode": "oil",
+   "region": "6873d11394e6b3b7989a4bdb",
+   "upgrades": {
+    "storage": 1,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  },
+  {
+   "name": "PT. GALANGAN ANYAR",
+   "itemCode": "steel",
+   "region": "6873d11794e6b3b7989a4cf5",
+   "upgrades": {
+    "storage": 1,
+    "automatedEngine": 4,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  },
+  {
+   "name": "KODOK NGOREK",
+   "itemCode": "concrete",
+   "region": "6813b7099403bc4170a5d9c3",
+   "upgrades": {
+    "storage": 1,
+    "automatedEngine": 6,
+    "breakRoom": 1
+   },
+   "workerCount": 0
+  }
+ ],
+ "regions": [
+  [
+   "Abkhazia",
+   "683ddd3d36dbc90b78047488"
+  ],
+  [
+   "Abu Dhabi",
+   "683ddd3d36dbc90b78047451"
+  ],
+  [
+   "Abuja",
+   "683ddd3e36dbc90b78047525"
+  ],
+  [
+   "Aden",
+   "683ddd3f36dbc90b78047592"
+  ],
+  [
+   "Adrar",
+   "6873d11494e6b3b7989a4bf0"
+  ],
+  [
+   "Aegean Islands",
+   "696a81f5882256e1db11820a"
+  ],
+  [
+   "Aegean Region",
+   "6813b7059403bc4170a5d7a1"
+  ],
+  [
+   "Agadez",
+   "6873d11494e6b3b7989a4c0b"
+  ],
+  [
+   "Aktobe",
+   "6813b70d9403bc4170a5db5b"
+  ],
+  [
+   "Al Anbar",
+   "683ddd3d36dbc90b780474a0"
+  ],
+  [
+   "Al Hodeidah",
+   "683ddd3f36dbc90b78047595"
+  ],
+  [
+   "Al Hudud ash Shamaliyah",
+   "6813b70c9403bc4170a5db34"
+  ],
+  [
+   "Al Jawf",
+   "6813b70c9403bc4170a5db37"
+  ],
+  [
+   "Al Karak",
+   "683ddd3e36dbc90b780474af"
+  ],
+  [
+   "Al Madinah",
+   "6813b70c9403bc4170a5db46"
+  ],
+  [
+   "Al Quassim",
+   "6813b70c9403bc4170a5db4c"
+  ],
+  [
+   "Al Wusta",
+   "683ddd3e36dbc90b7804753d"
+  ],
+  [
+   "Alaska",
+   "6813b7069403bc4170a5d7ec"
+  ],
+  [
+   "Aleppo & Idlib",
+   "683ddd3f36dbc90b78047565"
+  ],
+  [
+   "Alexandria",
+   "6813b7099403bc4170a5d963"
+  ],
+  [
+   "Algarve",
+   "6813b7049403bc4170a5d6fc"
+  ],
+  [
+   "Algerian Atlas Mountains",
+   "696a81f5882256e1db118214"
+  ],
+  [
+   "Almaty",
+   "6813b70d9403bc4170a5db6d"
+  ],
+  [
+   "American Atlantic Coast",
+   "6813b7069403bc4170a5d804"
+  ],
+  [
+   "American Great Lakes",
+   "6813b7069403bc4170a5d7ef"
+  ],
+  [
+   "American Pacific Coast",
+   "6813b7069403bc4170a5d7f8"
+  ],
+  [
+   "Amhara",
+   "683ddd3d36dbc90b78047479"
+  ],
+  [
+   "Amman",
+   "683ddd3e36dbc90b780474b2"
+  ],
+  [
+   "Andalusia",
+   "6813b7049403bc4170a5d6e7"
+  ],
+  [
+   "Andorra",
+   "687eab418fc7f0dfa1d2b985"
+  ],
+  [
+   "Antananarivo",
+   "683ddd3f36dbc90b780475ce"
+  ],
+  [
+   "Antofagasta",
+   "6813b7089403bc4170a5d936"
+  ],
+  [
+   "Antsiranana",
+   "683ddd3f36dbc90b780475dd"
+  ],
+  [
+   "Aquitaine",
+   "6813b7039403bc4170a5d6b4"
+  ],
+  [
+   "Ar Riyad",
+   "6813b70c9403bc4170a5db49"
+  ],
+  [
+   "Arctic Ural Northlands",
+   "696a81f5882256e1db11821e"
+  ],
+  [
+   "Arequipa",
+   "6813b7089403bc4170a5d948"
+  ],
+  [
+   "Armenia",
+   "6813b70d9403bc4170a5db82"
+  ],
+  [
+   "Ash Sharqiyah",
+   "6813b70c9403bc4170a5db31"
+  ],
+  [
+   "Ashgabat",
+   "6813b70c9403bc4170a5db0a"
+  ],
+  [
+   "Asir",
+   "6813b70c9403bc4170a5db3d"
+  ],
+  [
+   "Astana",
+   "6813b70d9403bc4170a5db55"
+  ],
+  [
+   "Atlantic Canada",
+   "6813b7079403bc4170a5d855"
+  ],
+  [
+   "Auk\u0161taitija",
+   "6813b7059403bc4170a5d75c"
+  ],
+  [
+   "Aur\u00e8s Mountains",
+   "696a81f5882256e1db118216"
+  ],
+  [
+   "Azad Kashmir",
+   "6813b70d9403bc4170a5dba9"
+  ],
+  [
+   "Azores",
+   "687eab418fc7f0dfa1d2b98e"
+  ],
+  [
+   "Baden-W\u00fcrttemberg",
+   "6813b7049403bc4170a5d6de"
+  ],
+  [
+   "Baghdad",
+   "683ddd3e36dbc90b780474a6"
+  ],
+  [
+   "Bahamas",
+   "6813b70b9403bc4170a5da8f"
+  ],
+  [
+   "Bahr el Ghazal",
+   "6813b70a9403bc4170a5da50"
+  ],
+  [
+   "Bahrain",
+   "687eab418fc7f0dfa1d2b988"
+  ],
+  [
+   "Baikal Highlands",
+   "696a81f5882256e1db118222"
+  ],
+  [
+   "Baja California",
+   "6813b7069403bc4170a5d81c"
+  ],
+  [
+   "Bakool and Hiraan",
+   "683ddd3f36dbc90b78047556"
+  ],
+  [
+   "Baku",
+   "6813b70d9403bc4170a5db7c"
+  ],
+  [
+   "Balearic Islands",
+   "6813b7049403bc4170a5d6e4"
+  ],
+  [
+   "Balkan Region",
+   "6813b70c9403bc4170a5db07"
+  ],
+  [
+   "Banat & Cri\u0219ana",
+   "6813b7059403bc4170a5d753"
+  ],
+  [
+   "Bangkok",
+   "683ddd3f36dbc90b78047574"
+  ],
+  [
+   "Bari and Sanaag",
+   "683ddd3f36dbc90b78047553"
+  ],
+  [
+   "Battambang",
+   "683ddd3e36dbc90b780474bb"
+  ],
+  [
+   "Bavaria",
+   "6813b7049403bc4170a5d6e1"
+  ],
+  [
+   "Beirut",
+   "683ddd3e36dbc90b780474dc"
+  ],
+  [
+   "Belgrade",
+   "6813b7059403bc4170a5d79e"
+  ],
+  [
+   "Bel\u00e9m",
+   "6813b7089403bc4170a5d8f7"
+  ],
+  [
+   "Benue and Taraba",
+   "683ddd3e36dbc90b78047528"
+  ],
+  [
+   "Bern",
+   "6813b7039403bc4170a5d686"
+  ],
+  [
+   "Bioko",
+   "6873d11794e6b3b7989a4cc2"
+  ],
+  [
+   "Bishkek",
+   "6813b70c9403bc4170a5db1f"
+  ],
+  [
+   "Black Sea Coast",
+   "6813b7059403bc4170a5d7a4"
+  ],
+  [
+   "Bohemia & Vysocina",
+   "6813b7059403bc4170a5d73e"
+  ],
+  [
+   "Bok\u00e9 and Lab\u00e9",
+   "6873d11694e6b3b7989a4cb3"
+  ],
+  [
+   "Bolivian Valley",
+   "6813b7099403bc4170a5d99c"
+  ],
+  [
+   "Borkou",
+   "6873d11794e6b3b7989a4cf8"
+  ],
+  [
+   "Borno and Yobe",
+   "683ddd3e36dbc90b7804752e"
+  ],
+  [
+   "Brandenburg",
+   "6813b7049403bc4170a5d6d2"
+  ],
+  [
+   "Bras\u00edlia",
+   "6813b7089403bc4170a5d906"
+  ],
+  [
+   "Brest",
+   "6813b70b9403bc4170a5da5f"
+  ],
+  [
+   "British Columbia",
+   "6813b7079403bc4170a5d852"
+  ],
+  [
+   "Brittany",
+   "6813b7049403bc4170a5d6c3"
+  ],
+  [
+   "Brong-Ahafo",
+   "6873d11494e6b3b7989a4bea"
+  ],
+  [
+   "Brunei",
+   "6873d11594e6b3b7989a4c4d"
+  ],
+  [
+   "Brussels",
+   "6813b7039403bc4170a5d67c"
+  ],
+  [
+   "Buenos Aires",
+   "6813b7089403bc4170a5d90f"
+  ],
+  [
+   "Bukhoro",
+   "6813b70c9403bc4170a5db13"
+  ],
+  [
+   "Burundi",
+   "6873d11594e6b3b7989a4c47"
+  ],
+  [
+   "Cabinda",
+   "683ddd3d36dbc90b78047457"
+  ],
+  [
+   "Cabo Delgado & Niassa",
+   "683ddd3e36dbc90b78047513"
+  ],
+  [
+   "Campo Grande",
+   "6813b7089403bc4170a5d900"
+  ],
+  [
+   "Canadian Plains",
+   "6813b7079403bc4170a5d84f"
+  ],
+  [
+   "Canadian Territories",
+   "6813b7079403bc4170a5d858"
+  ],
+  [
+   "Canary Islands",
+   "6813b7049403bc4170a5d6f9"
+  ],
+  [
+   "Cape Verde",
+   "6873d11594e6b3b7989a4c4a"
+  ],
+  [
+   "Carinthia",
+   "6813b7049403bc4170a5d70b"
+  ],
+  [
+   "Caspian Sea Coast",
+   "6813b70b9403bc4170a5dac2"
+  ],
+  [
+   "Castile & Le\u00f3n",
+   "6813b7049403bc4170a5d6f0"
+  ],
+  [
+   "Castilla-La Mancha",
+   "6813b7049403bc4170a5d6ea"
+  ],
+  [
+   "Catalonia",
+   "6813b7049403bc4170a5d6ed"
+  ],
+  [
+   "Cayenne",
+   "6813b7049403bc4170a5d6c9"
+  ],
+  [
+   "Central Afghanistan",
+   "6813b70d9403bc4170a5db97"
+  ],
+  [
+   "Central Anatolia",
+   "6813b7059403bc4170a5d7b3"
+  ],
+  [
+   "Central Angola",
+   "683ddd3d36dbc90b7804745a"
+  ],
+  [
+   "Central Atlantic Region",
+   "6813b7099403bc4170a5d957"
+  ],
+  [
+   "Central Burkina Faso",
+   "6873d11594e6b3b7989a4c65"
+  ],
+  [
+   "Central Chernozem Region",
+   "6813b70a9403bc4170a5da14"
+  ],
+  [
+   "Central China",
+   "6813b7079403bc4170a5d8af"
+  ],
+  [
+   "Central Cuba",
+   "6813b70b9403bc4170a5da86"
+  ],
+  [
+   "Central Egypt",
+   "6813b7099403bc4170a5d969"
+  ],
+  [
+   "Central England",
+   "6813b7039403bc4170a5d6ae"
+  ],
+  [
+   "Central Eritrea",
+   "6873d11694e6b3b7989a4ca1"
+  ],
+  [
+   "Central Finland",
+   "6813b7079403bc4170a5d864"
+  ],
+  [
+   "Central France",
+   "6813b7039403bc4170a5d6b7"
+  ],
+  [
+   "Central Gabon",
+   "6873d11694e6b3b7989a4ca7"
+  ],
+  [
+   "Central Guyana",
+   "6813b70b9403bc4170a5daa4"
+  ],
+  [
+   "Central Iran",
+   "6813b70b9403bc4170a5dac8"
+  ],
+  [
+   "Central Kenya",
+   "6813b70a9403bc4170a5da2f"
+  ],
+  [
+   "Central Malawi",
+   "6873d11794e6b3b7989a4cd7"
+  ],
+  [
+   "Central Norway",
+   "6813b7069403bc4170a5d83a"
+  ],
+  [
+   "Central Paraguay",
+   "6813b7089403bc4170a5d92a"
+  ],
+  [
+   "Central Portugal",
+   "6813b7049403bc4170a5d702"
+  ],
+  [
+   "Central Senegal",
+   "6873d11494e6b3b7989a4bff"
+  ],
+  [
+   "Central Taiwan",
+   "6813b7089403bc4170a5d8d0"
+  ],
+  [
+   "Central Tanzania",
+   "6873d11894e6b3b7989a4d11"
+  ],
+  [
+   "Central Uganda",
+   "6873d11494e6b3b7989a4c14"
+  ],
+  [
+   "Central Ukraine",
+   "6813b70a9403bc4170a5d9f9"
+  ],
+  [
+   "Central Venezuela",
+   "6813b7099403bc4170a5d9c6"
+  ],
+  [
+   "Chari and Salamat",
+   "6873d11794e6b3b7989a4cfb"
+  ],
+  [
+   "Chiang Mai",
+   "683ddd3f36dbc90b78047577"
+  ],
+  [
+   "Chittagong",
+   "683ddd3d36dbc90b7804746a"
+  ],
+  [
+   "Chubu",
+   "6813b7079403bc4170a5d888"
+  ],
+  [
+   "Chugoku",
+   "6813b7079403bc4170a5d88e"
+  ],
+  [
+   "Coastal Gabon",
+   "6873d11694e6b3b7989a4caa"
+  ],
+  [
+   "Colombian Amazon",
+   "6813b7099403bc4170a5d9ab"
+  ],
+  [
+   "Colombian Andes",
+   "6813b7099403bc4170a5d9a5"
+  ],
+  [
+   "Colombian Caribbean",
+   "6813b7099403bc4170a5d9a8"
+  ],
+  [
+   "Colombian Orinoco",
+   "6813b7099403bc4170a5d9ae"
+  ],
+  [
+   "Colombian Pacific",
+   "6813b7099403bc4170a5d9b1"
+  ],
+  [
+   "Comoros",
+   "696a81f5882256e1db11822a"
+  ],
+  [
+   "Connacht",
+   "6813b7069403bc4170a5d825"
+  ],
+  [
+   "Continental Croatia",
+   "6813b7059403bc4170a5d792"
+  ],
+  [
+   "Continental Equatorial Guinea",
+   "6873d11794e6b3b7989a4cc5"
+  ],
+  [
+   "Copperbelt",
+   "6873d11894e6b3b7989a4d23"
+  ],
+  [
+   "Corsica",
+   "6813b7049403bc4170a5d6cc"
+  ],
+  [
+   "Crete",
+   "6813b7059403bc4170a5d7b6"
+  ],
+  [
+   "Crimea",
+   "6813b70a9403bc4170a5da08"
+  ],
+  [
+   "Cuvette and Plateaux",
+   "6873d11594e6b3b7989a4c3e"
+  ],
+  [
+   "Cuzco",
+   "6813b7089403bc4170a5d94b"
+  ],
+  [
+   "Cyprus",
+   "6813b7089403bc4170a5d94e"
+  ],
+  [
+   "Da Nang",
+   "683ddd3f36dbc90b78047583"
+  ],
+  [
+   "Dakar",
+   "6873d11494e6b3b7989a4c02"
+  ],
+  [
+   "Dakhla-Oued Ed-Dahab",
+   "696a81f5882256e1db118212"
+  ],
+  [
+   "Dalarna & V\u00e4rmland",
+   "6813b7069403bc4170a5d7d7"
+  ],
+  [
+   "Dalmatia",
+   "6813b7059403bc4170a5d789"
+  ],
+  [
+   "Damascus",
+   "683ddd3f36dbc90b78047568"
+  ],
+  [
+   "Darfur",
+   "6813b70a9403bc4170a5da44"
+  ],
+  [
+   "Dayr az Zawr",
+   "683ddd3f36dbc90b7804756b"
+  ],
+  [
+   "Da\u015foguz Region",
+   "6813b70c9403bc4170a5dafe"
+  ],
+  [
+   "Dhaka",
+   "683ddd3d36dbc90b7804746d"
+  ],
+  [
+   "Dhofar",
+   "683ddd3e36dbc90b78047540"
+  ],
+  [
+   "Dien Bien Phu",
+   "683ddd3f36dbc90b78047586"
+  ],
+  [
+   "Djibouti",
+   "6873d11694e6b3b7989a4c9e"
+  ],
+  [
+   "Dobrogea",
+   "6813b7059403bc4170a5d74d"
+  ],
+  [
+   "Dominican Republic",
+   "6813b70b9403bc4170a5da92"
+  ],
+  [
+   "Donbas",
+   "6813b70a9403bc4170a5d9f0"
+  ],
+  [
+   "Dong Hoi",
+   "683ddd3f36dbc90b78047589"
+  ],
+  [
+   "Dravida",
+   "6813b7099403bc4170a5d9d2"
+  ],
+  [
+   "Dr\u00e2a-Tafilalet",
+   "6813b7099403bc4170a5d95a"
+  ],
+  [
+   "Dubai",
+   "683ddd3d36dbc90b78047454"
+  ],
+  [
+   "Dushanbe",
+   "6813b70c9403bc4170a5db2e"
+  ],
+  [
+   "Dz\u016bkija",
+   "6813b7059403bc4170a5d762"
+  ],
+  [
+   "East Guyana",
+   "6813b70b9403bc4170a5da9e"
+  ],
+  [
+   "East Kazakhstan",
+   "6813b70d9403bc4170a5db64"
+  ],
+  [
+   "Eastern Afghanistan",
+   "6813b70d9403bc4170a5db91"
+  ],
+  [
+   "Eastern Algerian Sahara",
+   "6813b7099403bc4170a5d981"
+  ],
+  [
+   "Eastern Anatolia",
+   "6813b7059403bc4170a5d7ad"
+  ],
+  [
+   "Eastern Bolivia",
+   "6813b7099403bc4170a5d999"
+  ],
+  [
+   "Eastern Botswana",
+   "6873d11694e6b3b7989a4c74"
+  ],
+  [
+   "Eastern Burkina Faso",
+   "6873d11594e6b3b7989a4c68"
+  ],
+  [
+   "Eastern Cameroon",
+   "6873d11694e6b3b7989a4c8f"
+  ],
+  [
+   "Eastern Chad",
+   "6873d11894e6b3b7989a4cfe"
+  ],
+  [
+   "Eastern China",
+   "6813b7079403bc4170a5d8a6"
+  ],
+  [
+   "Eastern Costa Rica",
+   "6813b70b9403bc4170a5dad4"
+  ],
+  [
+   "Eastern Cuba",
+   "6813b70b9403bc4170a5da89"
+  ],
+  [
+   "Eastern El Salvador",
+   "6813b70c9403bc4170a5dae6"
+  ],
+  [
+   "Eastern Finland",
+   "6813b7079403bc4170a5d861"
+  ],
+  [
+   "Eastern France",
+   "6813b7049403bc4170a5d6ba"
+  ],
+  [
+   "Eastern Galicia",
+   "6813b70a9403bc4170a5d9ff"
+  ],
+  [
+   "Eastern Ghana",
+   "6873d11394e6b3b7989a4be1"
+  ],
+  [
+   "Eastern Honduras",
+   "6813b70c9403bc4170a5daec"
+  ],
+  [
+   "Eastern Iceland",
+   "683ddd3f36dbc90b780475c2"
+  ],
+  [
+   "Eastern Mashonaland",
+   "6873d11894e6b3b7989a4d32"
+  ],
+  [
+   "Eastern Mongolia",
+   "683ddd3e36dbc90b780474f5"
+  ],
+  [
+   "Eastern Namibia",
+   "683ddd3f36dbc90b780475e3"
+  ],
+  [
+   "Eastern Nicaragua",
+   "6813b70c9403bc4170a5dae0"
+  ],
+  [
+   "Eastern Panama",
+   "6813b70b9403bc4170a5dada"
+  ],
+  [
+   "Eastern Paraguay",
+   "6813b7089403bc4170a5d92d"
+  ],
+  [
+   "Eastern Serbia",
+   "6813b7059403bc4170a5d798"
+  ],
+  [
+   "Eastern South Korea",
+   "6813b7079403bc4170a5d8c1"
+  ],
+  [
+   "Eastern Sri Lanka",
+   "683ddd3f36dbc90b780475cb"
+  ],
+  [
+   "Eastern Taiwan",
+   "6813b7079403bc4170a5d8ca"
+  ],
+  [
+   "Eastern Tanzania",
+   "6873d11894e6b3b7989a4d14"
+  ],
+  [
+   "Eastern Uganda",
+   "6873d11494e6b3b7989a4c11"
+  ],
+  [
+   "Eastern Venezuela",
+   "6813b7099403bc4170a5d9c9"
+  ],
+  [
+   "Ecuadorian Amazon",
+   "6813b7099403bc4170a5d9b4"
+  ],
+  [
+   "Ecuadorian Coast",
+   "6813b7099403bc4170a5d9ba"
+  ],
+  [
+   "Ecuadorian Islands",
+   "6813b7099403bc4170a5d9bd"
+  ],
+  [
+   "Ecuadorian Sierra",
+   "6813b7099403bc4170a5d9b7"
+  ],
+  [
+   "Ennedi",
+   "6873d11894e6b3b7989a4d01"
+  ],
+  [
+   "Epirus",
+   "6813b7059403bc4170a5d7bc"
+  ],
+  [
+   "Equatoria",
+   "6813b70a9403bc4170a5da4a"
+  ],
+  [
+   "Eswatini",
+   "6873d11594e6b3b7989a4c53"
+  ],
+  [
+   "Falkland Islands",
+   "6813b70b9403bc4170a5da80"
+  ],
+  [
+   "Faranah",
+   "6873d11694e6b3b7989a4cb6"
+  ],
+  [
+   "Faroe Islands",
+   "696a81f5882256e1db11820c"
+  ],
+  [
+   "Fianarantsoa",
+   "683ddd3f36dbc90b780475d4"
+  ],
+  [
+   "Fiji",
+   "6813b70b9403bc4170a5da8c"
+  ],
+  [
+   "Flanders",
+   "6813b7039403bc4170a5d683"
+  ],
+  [
+   "Fortaleza",
+   "6813b7089403bc4170a5d8fa"
+  ],
+  [
+   "Free State",
+   "683ddd3f36dbc90b780475a7"
+  ],
+  [
+   "Friesland",
+   "6813b7039403bc4170a5d675"
+  ],
+  [
+   "Funen",
+   "6813b7069403bc4170a5d7c5"
+  ],
+  [
+   "Galicia",
+   "6813b7049403bc4170a5d6f6"
+  ],
+  [
+   "Gambia",
+   "6873d11694e6b3b7989a4cad"
+  ],
+  [
+   "Gansu",
+   "6813b7079403bc4170a5d8ac"
+  ],
+  [
+   "Gaza Strip",
+   "683ddd3f36dbc90b7804754c"
+  ],
+  [
+   "Gelderland-Brabant",
+   "6813b7039403bc4170a5d671"
+  ],
+  [
+   "Genca",
+   "6813b70d9403bc4170a5db70"
+  ],
+  [
+   "Ghanzi",
+   "6873d11694e6b3b7989a4c80"
+  ],
+  [
+   "Gilgit-Baltistan",
+   "6813b70d9403bc4170a5db9a"
+  ],
+  [
+   "Gomel",
+   "6813b70b9403bc4170a5da5c"
+  ],
+  [
+   "Gorno-Badakhshan",
+   "6813b70c9403bc4170a5db28"
+  ],
+  [
+   "Gotland",
+   "6813b7069403bc4170a5d7ce"
+  ],
+  [
+   "Great Plains",
+   "6813b7049403bc4170a5d726"
+  ],
+  [
+   "Great Vasyugan Mire",
+   "696a81f5882256e1db118220"
+  ],
+  [
+   "Greater Poland",
+   "6813b7049403bc4170a5d71d"
+  ],
+  [
+   "Grodno",
+   "6813b70b9403bc4170a5da59"
+  ],
+  [
+   "Guinea-Bissau",
+   "6873d11794e6b3b7989a4cc8"
+  ],
+  [
+   "Gujarat",
+   "6813b70a9403bc4170a5d9e4"
+  ],
+  [
+   "Gulf Region",
+   "683ddd3e36dbc90b780474a9"
+  ],
+  [
+   "Guria and Ajaria",
+   "683ddd3d36dbc90b7804748b"
+  ],
+  [
+   "Ha'il",
+   "6813b70c9403bc4170a5db4f"
+  ],
+  [
+   "Hadramwt",
+   "683ddd3f36dbc90b78047598"
+  ],
+  [
+   "Haiti",
+   "6813b70b9403bc4170a5daa7"
+  ],
+  [
+   "Hamgyong",
+   "683ddd3e36dbc90b780474c7"
+  ],
+  [
+   "Hanoi",
+   "683ddd3f36dbc90b7804758c"
+  ],
+  [
+   "Hardap",
+   "683ddd3f36dbc90b780475e9"
+  ],
+  [
+   "Haryana",
+   "6813b70a9403bc4170a5d9ea"
+  ],
+  [
+   "Haskovo & Burgas",
+   "6813b7059403bc4170a5d780"
+  ],
+  [
+   "Hawaii",
+   "6813b7069403bc4170a5d7e9"
+  ],
+  [
+   "Hiiu & Saare",
+   "6813b7059403bc4170a5d771"
+  ],
+  [
+   "Ho Chi Minh City",
+   "683ddd3f36dbc90b7804758f"
+  ],
+  [
+   "Hokkaido",
+   "6813b7079403bc4170a5d87f"
+  ],
+  [
+   "Holland",
+   "6813b7039403bc4170a5d679"
+  ],
+  [
+   "Homs & Hama",
+   "683ddd3f36dbc90b7804756e"
+  ],
+  [
+   "Hwanghae",
+   "683ddd3e36dbc90b780474ca"
+  ],
+  [
+   "Ile-de-France",
+   "6813b7049403bc4170a5d6bd"
+  ],
+  [
+   "Imereti",
+   "683ddd3d36dbc90b7804748e"
+  ],
+  [
+   "Inner mongolia",
+   "6813b7079403bc4170a5d89a"
+  ],
+  [
+   "Insular Venezuela",
+   "6813b7099403bc4170a5d9cc"
+  ],
+  [
+   "Iranian Azerbaijan",
+   "6813b70b9403bc4170a5dab9"
+  ],
+  [
+   "Iranian Balochistan",
+   "6813b70b9403bc4170a5dac5"
+  ],
+  [
+   "Iranian Kurdistan",
+   "6813b70b9403bc4170a5dace"
+  ],
+  [
+   "Irbid",
+   "683ddd3e36dbc90b780474b5"
+  ],
+  [
+   "Istria & Kvarner",
+   "6813b7059403bc4170a5d78c"
+  ],
+  [
+   "Jagang",
+   "683ddd3e36dbc90b780474cd"
+  ],
+  [
+   "Jaladhi",
+   "6813b70a9403bc4170a5d9ed"
+  ],
+  [
+   "Jalisco & Michoacan",
+   "6813b7069403bc4170a5d810"
+  ],
+  [
+   "Jamaica",
+   "6813b70b9403bc4170a5daaa"
+  ],
+  [
+   "Java",
+   "6813b7089403bc4170a5d8d3"
+  ],
+  [
+   "Jerusalem",
+   "683ddd3d36dbc90b7804749d"
+  ],
+  [
+   "Jizan",
+   "6813b70c9403bc4170a5db40"
+  ],
+  [
+   "Jutland",
+   "6813b7069403bc4170a5d7c8"
+  ],
+  [
+   "J\u00e4mtland",
+   "6813b7069403bc4170a5d7da"
+  ],
+  [
+   "Kachin and Sagaing",
+   "683ddd3e36dbc90b780474e6"
+  ],
+  [
+   "Kakheti",
+   "683ddd3d36dbc90b78047494"
+  ],
+  [
+   "Kalimantan",
+   "6813b7089403bc4170a5d8d6"
+  ],
+  [
+   "Kaliningrad",
+   "6813b70a9403bc4170a5da0e"
+  ],
+  [
+   "Kankan",
+   "6873d11694e6b3b7989a4cb9"
+  ],
+  [
+   "Kano",
+   "683ddd3e36dbc90b78047531"
+  ],
+  [
+   "Kansai",
+   "6813b7079403bc4170a5d88b"
+  ],
+  [
+   "Kanto",
+   "6813b7079403bc4170a5d885"
+  ],
+  [
+   "Karabakh",
+   "6813b70d9403bc4170a5db76"
+  ],
+  [
+   "Karas",
+   "683ddd4036dbc90b780475ec"
+  ],
+  [
+   "Karelia",
+   "6813b70a9403bc4170a5da29"
+  ],
+  [
+   "Kasai",
+   "6873d11494e6b3b7989a4c20"
+  ],
+  [
+   "Kashmir",
+   "6813b70a9403bc4170a5d9d8"
+  ],
+  [
+   "Katanga",
+   "6873d11494e6b3b7989a4c26"
+  ],
+  [
+   "Kayes",
+   "6873d11394e6b3b7989a4bcf"
+  ],
+  [
+   "Kedah and Perak",
+   "683ddd3e36dbc90b78047504"
+  ],
+  [
+   "Kenyan Coast",
+   "6813b70a9403bc4170a5da35"
+  ],
+  [
+   "Kgalagadi",
+   "6873d11694e6b3b7989a4c77"
+  ],
+  [
+   "Khatlon",
+   "6813b70c9403bc4170a5db2b"
+  ],
+  [
+   "Khorasan",
+   "6813b70b9403bc4170a5dabc"
+  ],
+  [
+   "Khyber Pakhtunkhwa",
+   "6813b70d9403bc4170a5dba6"
+  ],
+  [
+   "Kidal",
+   "6873d11394e6b3b7989a4bd5"
+  ],
+  [
+   "Kindia and Mamou",
+   "6873d11794e6b3b7989a4cbc"
+  ],
+  [
+   "Kinshasa",
+   "6873d11494e6b3b7989a4c1d"
+  ],
+  [
+   "Kivu",
+   "6873d11494e6b3b7989a4c29"
+  ],
+  [
+   "Kogi and Edo",
+   "683ddd3e36dbc90b78047534"
+  ],
+  [
+   "Kosovo",
+   "6813b7079403bc4170a5d87c"
+  ],
+  [
+   "Kostanay",
+   "6813b70d9403bc4170a5db5e"
+  ],
+  [
+   "Kotto",
+   "6873d11594e6b3b7989a4c2c"
+  ],
+  [
+   "Koulikoro & Sikasso",
+   "6873d11394e6b3b7989a4bd8"
+  ],
+  [
+   "Krasnoyarsk Krai",
+   "6813b70a9403bc4170a5da23"
+  ],
+  [
+   "Kuala Lumpur",
+   "683ddd3e36dbc90b78047507"
+  ],
+  [
+   "Kunene-Erongo",
+   "683ddd3f36dbc90b780475e6"
+  ],
+  [
+   "Kurzeme",
+   "6813b7059403bc4170a5d768"
+  ],
+  [
+   "Kuwait",
+   "6813b70d9403bc4170a5dbb2"
+  ],
+  [
+   "KwaZulu-Natal",
+   "683ddd3f36dbc90b780475aa"
+  ],
+  [
+   "Kyushu",
+   "6813b7079403bc4170a5d894"
+  ],
+  [
+   "La Paz",
+   "6813b7099403bc4170a5d99f"
+  ],
+  [
+   "La Serena",
+   "6813b7089403bc4170a5d939"
+  ],
+  [
+   "Lagos",
+   "683ddd3e36dbc90b78047537"
+  ],
+  [
+   "Lakes Region",
+   "6873d11894e6b3b7989a4d17"
+  ],
+  [
+   "Lappland",
+   "6813b7069403bc4170a5d7dd"
+  ],
+  [
+   "Lattakia & Tartus",
+   "683ddd3f36dbc90b78047571"
+  ],
+  [
+   "Lazio",
+   "6813b7039403bc4170a5d690"
+  ],
+  [
+   "La\u00e2youne-Sakia El Hamra",
+   "6813b7089403bc4170a5d951"
+  ],
+  [
+   "Lebap Region",
+   "6813b70c9403bc4170a5db01"
+  ],
+  [
+   "Left-Bank Ukraine",
+   "6813b70a9403bc4170a5d9f6"
+  ],
+  [
+   "Leinster",
+   "6813b7069403bc4170a5d828"
+  ],
+  [
+   "Leninabad",
+   "6813b70c9403bc4170a5db25"
+  ],
+  [
+   "Lesser Poland",
+   "6813b7049403bc4170a5d71a"
+  ],
+  [
+   "Liechtenstein",
+   "696a81f5882256e1db118204"
+  ],
+  [
+   "Lima",
+   "6813b7089403bc4170a5d945"
+  ],
+  [
+   "Limpopo",
+   "683ddd3f36dbc90b780475ad"
+  ],
+  [
+   "Lisbon & Alentejo",
+   "6813b7049403bc4170a5d6ff"
+  ],
+  [
+   "Lower Egypt",
+   "6813b7099403bc4170a5d96c"
+  ],
+  [
+   "Lower Juba",
+   "683ddd3f36dbc90b78047559"
+  ],
+  [
+   "Lower Saxony",
+   "6813b7049403bc4170a5d6d8"
+  ],
+  [
+   "Luanda",
+   "683ddd3d36dbc90b7804745d"
+  ],
+  [
+   "Luang Namtha",
+   "683ddd3e36dbc90b780474d3"
+  ],
+  [
+   "Luapula",
+   "6873d11894e6b3b7989a4d26"
+  ],
+  [
+   "Lunda",
+   "683ddd3d36dbc90b78047460"
+  ],
+  [
+   "Lusaka",
+   "6873d11894e6b3b7989a4d29"
+  ],
+  [
+   "Luxembourg",
+   "6813b7069403bc4170a5d822"
+  ],
+  [
+   "Luzon",
+   "6813b7089403bc4170a5d8e8"
+  ],
+  [
+   "Ma'rib",
+   "683ddd3f36dbc90b7804759b"
+  ],
+  [
+   "Macedonia",
+   "6813b7059403bc4170a5d7bf"
+  ],
+  [
+   "Madeira",
+   "687eab418fc7f0dfa1d2b98b"
+  ],
+  [
+   "Madhya Pradesh",
+   "6813b70a9403bc4170a5d9de"
+  ],
+  [
+   "Mahajanga",
+   "683ddd3f36dbc90b780475da"
+  ],
+  [
+   "Makkah",
+   "6813b70c9403bc4170a5db52"
+  ],
+  [
+   "Malta",
+   "6873d11594e6b3b7989a4c41"
+  ],
+  [
+   "Maluku",
+   "6813b7089403bc4170a5d8dc"
+  ],
+  [
+   "Mamose",
+   "6873d11794e6b3b7989a4ce9"
+  ],
+  [
+   "Manaus",
+   "6813b7089403bc4170a5d8f1"
+  ],
+  [
+   "Manica",
+   "683ddd3e36dbc90b78047516"
+  ],
+  [
+   "Maputo",
+   "683ddd3e36dbc90b78047519"
+  ],
+  [
+   "Maramure\u0219 & Bucovina",
+   "6813b7059403bc4170a5d756"
+  ],
+  [
+   "Maratha",
+   "6813b70a9403bc4170a5d9d5"
+  ],
+  [
+   "Marmara",
+   "6813b7059403bc4170a5d7b0"
+  ],
+  [
+   "Mary Region",
+   "6813b70c9403bc4170a5db04"
+  ],
+  [
+   "Masovia",
+   "6813b7049403bc4170a5d717"
+  ],
+  [
+   "Mauritius",
+   "696a81f5882256e1db11822c"
+  ],
+  [
+   "Mayo-K\u00e9bbi and Logone",
+   "6873d11894e6b3b7989a4d04"
+  ],
+  [
+   "Mbomou",
+   "6873d11594e6b3b7989a4c2f"
+  ],
+  [
+   "Mecklenburg-Holstein",
+   "6813b7049403bc4170a5d6cf"
+  ],
+  [
+   "Mendoza",
+   "6813b7089403bc4170a5d921"
+  ],
+  [
+   "Mexico City",
+   "6813b7069403bc4170a5d81f"
+  ],
+  [
+   "Middle Shabelle",
+   "683ddd3f36dbc90b78047562"
+  ],
+  [
+   "Midlands and Masvingo",
+   "6873d11894e6b3b7989a4d35"
+  ],
+  [
+   "Mindanao",
+   "6813b7089403bc4170a5d8ee"
+  ],
+  [
+   "Minsk",
+   "6813b70a9403bc4170a5da53"
+  ],
+  [
+   "Mogilev",
+   "6813b70b9403bc4170a5da62"
+  ],
+  [
+   "Moldova",
+   "6813b70a9403bc4170a5da2c"
+  ],
+  [
+   "Montana & Lovech",
+   "6813b7059403bc4170a5d786"
+  ],
+  [
+   "Montenegro",
+   "6813b7079403bc4170a5d879"
+  ],
+  [
+   "Montevideo",
+   "6813b7089403bc4170a5d924"
+  ],
+  [
+   "Moravia",
+   "6813b7049403bc4170a5d73b"
+  ],
+  [
+   "Moscow",
+   "6813b70a9403bc4170a5da17"
+  ],
+  [
+   "Mpumalanga",
+   "683ddd3f36dbc90b780475b0"
+  ],
+  [
+   "Muchinga",
+   "6873d11894e6b3b7989a4d2c"
+  ],
+  [
+   "Mudug and Nugaal",
+   "683ddd3f36dbc90b7804755c"
+  ],
+  [
+   "Munster",
+   "6813b7069403bc4170a5d82b"
+  ],
+  [
+   "Muntenia",
+   "696a81f5882256e1db118208"
+  ],
+  [
+   "Musandam",
+   "683ddd3e36dbc90b78047543"
+  ],
+  [
+   "Muscat",
+   "683ddd3e36dbc90b78047546"
+  ],
+  [
+   "M\u00e9naka & Gao",
+   "6873d11394e6b3b7989a4bde"
+  ],
+  [
+   "Najran",
+   "6813b70c9403bc4170a5db3a"
+  ],
+  [
+   "Nakhon Ratchasima",
+   "683ddd3f36dbc90b7804757a"
+  ],
+  [
+   "Nakhon Sawan",
+   "683ddd3f36dbc90b7804757d"
+  ],
+  [
+   "Nakhon Si Thammarat",
+   "683ddd3f36dbc90b78047580"
+  ],
+  [
+   "Naples",
+   "6813b7039403bc4170a5d699"
+  ],
+  [
+   "Naryn",
+   "6813b70c9403bc4170a5db22"
+  ],
+  [
+   "Navoi",
+   "6813b70c9403bc4170a5db10"
+  ],
+  [
+   "Naxcivan",
+   "6813b70d9403bc4170a5db73"
+  ],
+  [
+   "Nay Pyi Taw",
+   "683ddd3e36dbc90b780474e9"
+  ],
+  [
+   "Neva Highlands",
+   "696a81f5882256e1db11821c"
+  ],
+  [
+   "New Caledonia",
+   "6873d11594e6b3b7989a4c62"
+  ],
+  [
+   "New South Wales",
+   "6813b70b9403bc4170a5da71"
+  ],
+  [
+   "New Valley",
+   "6813b7099403bc4170a5d96f"
+  ],
+  [
+   "North East",
+   "6813b7079403bc4170a5d897"
+  ],
+  [
+   "North Eastern Kenya",
+   "6813b70a9403bc4170a5da38"
+  ],
+  [
+   "North Island",
+   "6813b70b9403bc4170a5da7a"
+  ],
+  [
+   "North Lebanon",
+   "683ddd3e36dbc90b780474df"
+  ],
+  [
+   "North Suriname",
+   "6813b70b9403bc4170a5dab3"
+  ],
+  [
+   "North West",
+   "683ddd3f36dbc90b780475b6"
+  ],
+  [
+   "Northeastern Afghanistan",
+   "6813b70d9403bc4170a5db85"
+  ],
+  [
+   "Northeastern Algeria",
+   "6813b7099403bc4170a5d984"
+  ],
+  [
+   "Northeastern China",
+   "6813b7079403bc4170a5d8a9"
+  ],
+  [
+   "Northeastern Czechia",
+   "6813b7059403bc4170a5d741"
+  ],
+  [
+   "Northeastern C\u00f4te d'Ivoire",
+   "6873d11694e6b3b7989a4c86"
+  ],
+  [
+   "Northeastern Greenland",
+   "6813b70b9403bc4170a5da9b"
+  ],
+  [
+   "Northeastern Iceland",
+   "683ddd3f36dbc90b780475c5"
+  ],
+  [
+   "Northeastern India",
+   "6813b70a9403bc4170a5d9e7"
+  ],
+  [
+   "Northeastern Italy",
+   "6813b7039403bc4170a5d696"
+  ],
+  [
+   "Northeastern Liberia",
+   "6873d11794e6b3b7989a4ccc"
+  ],
+  [
+   "Northeastern Libya",
+   "6813b7099403bc4170a5d97b"
+  ],
+  [
+   "Northeastern Mexico",
+   "6813b7069403bc4170a5d816"
+  ],
+  [
+   "Northeastern Poland",
+   "6813b7049403bc4170a5d720"
+  ],
+  [
+   "Northern Albania",
+   "6813b7069403bc4170a5d7e6"
+  ],
+  [
+   "Northern Algeria",
+   "6813b7099403bc4170a5d987"
+  ],
+  [
+   "Northern Austria",
+   "6813b7049403bc4170a5d711"
+  ],
+  [
+   "Northern Bangladesh",
+   "683ddd3d36dbc90b78047470"
+  ],
+  [
+   "Northern Belize",
+   "6813b70c9403bc4170a5dafb"
+  ],
+  [
+   "Northern Benin",
+   "6873d11594e6b3b7989a4c6e"
+  ],
+  [
+   "Northern Bosnia",
+   "6813b7079403bc4170a5d86a"
+  ],
+  [
+   "Northern Cameroon",
+   "6873d11694e6b3b7989a4c92"
+  ],
+  [
+   "Northern Cape",
+   "683ddd3f36dbc90b780475b3"
+  ],
+  [
+   "Northern District",
+   "683ddd3d36dbc90b7804749a"
+  ],
+  [
+   "Northern Estonia",
+   "6813b7059403bc4170a5d77a"
+  ],
+  [
+   "Northern Finland",
+   "6813b7079403bc4170a5d867"
+  ],
+  [
+   "Northern France",
+   "6813b7049403bc4170a5d6c0"
+  ],
+  [
+   "Northern Ghana",
+   "6873d11494e6b3b7989a4be7"
+  ],
+  [
+   "Northern Guatemala",
+   "6813b70c9403bc4170a5daf5"
+  ],
+  [
+   "Northern Hungary",
+   "6813b7049403bc4170a5d72c"
+  ],
+  [
+   "Northern Iraq",
+   "683ddd3e36dbc90b780474ac"
+  ],
+  [
+   "Northern Ireland",
+   "6813b7039403bc4170a5d6ab"
+  ],
+  [
+   "Northern Lesotho",
+   "6873d11594e6b3b7989a4c56"
+  ],
+  [
+   "Northern Macedonia",
+   "6813b7079403bc4170a5d873"
+  ],
+  [
+   "Northern Malawi",
+   "6873d11794e6b3b7989a4cda"
+  ],
+  [
+   "Northern Mongolia",
+   "683ddd3e36dbc90b780474f8"
+  ],
+  [
+   "Northern Morocco",
+   "6813b7099403bc4170a5d954"
+  ],
+  [
+   "Northern Namibia",
+   "683ddd3f36dbc90b780475e0"
+  ],
+  [
+   "Northern Nepal",
+   "6873d11794e6b3b7989a4ce0"
+  ],
+  [
+   "Northern Norway",
+   "6813b7069403bc4170a5d83d"
+  ],
+  [
+   "Northern Oman",
+   "683ddd3f36dbc90b78047549"
+  ],
+  [
+   "Northern Paraguay",
+   "6813b7089403bc4170a5d930"
+  ],
+  [
+   "Northern Portugal",
+   "6813b7049403bc4170a5d705"
+  ],
+  [
+   "Northern Senegal",
+   "6873d11494e6b3b7989a4bfc"
+  ],
+  [
+   "Northern South Korea",
+   "6813b7079403bc4170a5d8bb"
+  ],
+  [
+   "Northern Spain",
+   "6813b7049403bc4170a5d6f3"
+  ],
+  [
+   "Northern Sudan",
+   "6813b70a9403bc4170a5da41"
+  ],
+  [
+   "Northern Taiwan",
+   "6813b7079403bc4170a5d8c7"
+  ],
+  [
+   "Northern Tanzania",
+   "6873d11894e6b3b7989a4d1a"
+  ],
+  [
+   "Northern Territory",
+   "6813b70b9403bc4170a5da68"
+  ],
+  [
+   "Northern USA",
+   "6813b7069403bc4170a5d7f2"
+  ],
+  [
+   "Northern Uganda",
+   "6873d11494e6b3b7989a4c0e"
+  ],
+  [
+   "Northwestern Afghanistan",
+   "6813b70d9403bc4170a5db88"
+  ],
+  [
+   "Northwestern Algeria",
+   "6813b7099403bc4170a5d98a"
+  ],
+  [
+   "Northwestern Botswana",
+   "6873d11694e6b3b7989a4c7a"
+  ],
+  [
+   "Northwestern C\u00f4te d'Ivoire",
+   "6873d11694e6b3b7989a4c83"
+  ],
+  [
+   "Northwestern Italy",
+   "6813b7039403bc4170a5d693"
+  ],
+  [
+   "Northwestern Libya",
+   "6813b7099403bc4170a5d975"
+  ],
+  [
+   "Northwestern Mexico",
+   "6813b7069403bc4170a5d819"
+  ],
+  [
+   "Northwestern USA",
+   "6813b7069403bc4170a5d7f5"
+  ],
+  [
+   "Norwestern Greenland",
+   "6813b70b9403bc4170a5da98"
+  ],
+  [
+   "Nuba Mountains",
+   "6813b70a9403bc4170a5da47"
+  ],
+  [
+   "Nusa Tenggara",
+   "6813b7089403bc4170a5d8e2"
+  ],
+  [
+   "Nz\u00e9r\u00e9kor\u00e9",
+   "6873d11794e6b3b7989a4cbf"
+  ],
+  [
+   "Odesa",
+   "6813b70a9403bc4170a5da02"
+  ],
+  [
+   "Ogoou\u00e9",
+   "6873d11694e6b3b7989a4cb0"
+  ],
+  [
+   "Okinawa",
+   "696a81f5882256e1db118210"
+  ],
+  [
+   "Oltenia",
+   "6813b7059403bc4170a5d747"
+  ],
+  [
+   "Ontario",
+   "6813b7079403bc4170a5d84c"
+  ],
+  [
+   "Orientale",
+   "6873d11494e6b3b7989a4c1a"
+  ],
+  [
+   "Oromia",
+   "683ddd3d36dbc90b7804747f"
+  ],
+  [
+   "Osh",
+   "6813b70c9403bc4170a5db1c"
+  ],
+  [
+   "Ostlandet",
+   "6813b7069403bc4170a5d831"
+  ],
+  [
+   "Ouham",
+   "6873d11594e6b3b7989a4c32"
+  ],
+  [
+   "Outer Manchuria",
+   "696a81f5882256e1db118226"
+  ],
+  [
+   "Pahang",
+   "683ddd3e36dbc90b7804750a"
+  ],
+  [
+   "Pakistani Balochistan",
+   "6813b70d9403bc4170a5db9d"
+  ],
+  [
+   "Papua",
+   "6813b7089403bc4170a5d8df"
+  ],
+  [
+   "Papua Islands",
+   "6873d11794e6b3b7989a4cef"
+  ],
+  [
+   "Papua and Highlands",
+   "6873d11794e6b3b7989a4cec"
+  ],
+  [
+   "Patagonia",
+   "6813b7089403bc4170a5d912"
+  ],
+  [
+   "Pavlodar",
+   "6813b70d9403bc4170a5db61"
+  ],
+  [
+   "Peloponnese",
+   "6813b7059403bc4170a5d7b9"
+  ],
+  [
+   "Persian Gulf Coast",
+   "6813b70b9403bc4170a5dabf"
+  ],
+  [
+   "Pest",
+   "6813b7049403bc4170a5d72f"
+  ],
+  [
+   "Phnom Penh",
+   "683ddd3e36dbc90b780474be"
+  ],
+  [
+   "Pieriga",
+   "6813b7059403bc4170a5d76e"
+  ],
+  [
+   "Pomerania",
+   "6813b7049403bc4170a5d723"
+  ],
+  [
+   "Porto Alegre",
+   "6813b7089403bc4170a5d90c"
+  ],
+  [
+   "Posadas",
+   "6813b7089403bc4170a5d918"
+  ],
+  [
+   "Presov & Kosice",
+   "6813b7069403bc4170a5d846"
+  ],
+  [
+   "Puerto Montt",
+   "6813b7089403bc4170a5d93f"
+  ],
+  [
+   "Puerto Rico",
+   "6813b70b9403bc4170a5daad"
+  ],
+  [
+   "Punjab",
+   "6813b70d9403bc4170a5dba3"
+  ],
+  [
+   "Pyongyang",
+   "683ddd3e36dbc90b780474d0"
+  ],
+  [
+   "Qatar",
+   "6813b70d9403bc4170a5dbaf"
+  ],
+  [
+   "Qinghai",
+   "6813b7079403bc4170a5d8a3"
+  ],
+  [
+   "Quebec",
+   "6813b7069403bc4170a5d849"
+  ],
+  [
+   "Queensland",
+   "6813b70b9403bc4170a5da6e"
+  ],
+  [
+   "Rakhine and Chin",
+   "683ddd3e36dbc90b780474ec"
+  ],
+  [
+   "Razgrad & Varna",
+   "6813b7059403bc4170a5d783"
+  ],
+  [
+   "Recife",
+   "6813b7089403bc4170a5d909"
+  ],
+  [
+   "Red Sea Coast",
+   "6813b7099403bc4170a5d966"
+  ],
+  [
+   "Red Sea Region",
+   "6873d11694e6b3b7989a4ca4"
+  ],
+  [
+   "Resistencia",
+   "6813b7089403bc4170a5d91b"
+  ],
+  [
+   "Rhine",
+   "6813b7049403bc4170a5d6db"
+  ],
+  [
+   "Rift Valley",
+   "6813b70a9403bc4170a5da32"
+  ],
+  [
+   "Rio de Janeiro",
+   "6813b7089403bc4170a5d8f4"
+  ],
+  [
+   "Romagna & Tuscany",
+   "681a1795a55a0e2b88d5ae39"
+  ],
+  [
+   "Romanian Moldavia",
+   "6813b7059403bc4170a5d74a"
+  ],
+  [
+   "Russian Far East",
+   "6813b70a9403bc4170a5da26"
+  ],
+  [
+   "Rwanda",
+   "6873d11594e6b3b7989a4c44"
+  ],
+  [
+   "R\u00e9union",
+   "696a81f5882256e1db118206"
+  ],
+  [
+   "Sabah",
+   "683ddd3e36dbc90b7804750d"
+  ],
+  [
+   "Sakha Republic",
+   "696a81f5882256e1db118224"
+  ],
+  [
+   "Salta",
+   "6813b7089403bc4170a5d91e"
+  ],
+  [
+   "Salto",
+   "6813b7089403bc4170a5d927"
+  ],
+  [
+   "Salvador",
+   "6813b7089403bc4170a5d903"
+  ],
+  [
+   "Samarkand",
+   "6813b70c9403bc4170a5db19"
+  ],
+  [
+   "Samogitia",
+   "6813b7059403bc4170a5d759"
+  ],
+  [
+   "Sana'a",
+   "683ddd3f36dbc90b7804759e"
+  ],
+  [
+   "Sangha and Likouala",
+   "6873d11594e6b3b7989a4c38"
+  ],
+  [
+   "Santiago",
+   "6813b7089403bc4170a5d933"
+  ],
+  [
+   "Saratov & Orenburg",
+   "6813b70a9403bc4170a5da1d"
+  ],
+  [
+   "Sarawak",
+   "683ddd3e36dbc90b78047510"
+  ],
+  [
+   "Sardinia",
+   "6813b7039403bc4170a5d69f"
+  ],
+  [
+   "Saxony",
+   "6813b7049403bc4170a5d6d5"
+  ],
+  [
+   "Scotland",
+   "6813b7039403bc4170a5d6a2"
+  ],
+  [
+   "Sekong",
+   "683ddd3e36dbc90b780474d9"
+  ],
+  [
+   "Sfax",
+   "6813b7099403bc4170a5d98d"
+  ],
+  [
+   "Shan State",
+   "683ddd3e36dbc90b780474ef"
+  ],
+  [
+   "Shikoku",
+   "6813b7079403bc4170a5d891"
+  ],
+  [
+   "Shirvan",
+   "6813b70d9403bc4170a5db7f"
+  ],
+  [
+   "Sichuan",
+   "6813b7079403bc4170a5d8b8"
+  ],
+  [
+   "Sicily",
+   "6813b7039403bc4170a5d69c"
+  ],
+  [
+   "Sidama",
+   "683ddd3d36dbc90b7804747c"
+  ],
+  [
+   "Siem Reap",
+   "683ddd3e36dbc90b780474c1"
+  ],
+  [
+   "Sierra Leone",
+   "6873d11794e6b3b7989a4cf2"
+  ],
+  [
+   "Silesia",
+   "6813b7049403bc4170a5d714"
+  ],
+  [
+   "Sinai",
+   "6813b7099403bc4170a5d960"
+  ],
+  [
+   "Sindh",
+   "6813b70d9403bc4170a5dba0"
+  ],
+  [
+   "Singapore",
+   "6813b70a9403bc4170a5da3e"
+  ],
+  [
+   "Siyazen",
+   "6813b70d9403bc4170a5db79"
+  ],
+  [
+   "Sk\u00e5ne & Halland",
+   "6813b7069403bc4170a5d7d1"
+  ],
+  [
+   "Slavonia",
+   "6813b7059403bc4170a5d78f"
+  ],
+  [
+   "Slovenian Littoral",
+   "6813b7049403bc4170a5d732"
+  ],
+  [
+   "Sm\u00e5land",
+   "6813b7069403bc4170a5d7d4"
+  ],
+  [
+   "Socotra",
+   "683ddd3f36dbc90b780475a1"
+  ],
+  [
+   "Sofala",
+   "683ddd3e36dbc90b7804751c"
+  ],
+  [
+   "Sofia & Plovdiv",
+   "6813b7059403bc4170a5d77d"
+  ],
+  [
+   "Sokoto and Niger",
+   "683ddd3e36dbc90b7804753a"
+  ],
+  [
+   "Solomon Islands",
+   "6873d11594e6b3b7989a4c5c"
+  ],
+  [
+   "Somali Region",
+   "683ddd3d36dbc90b78047482"
+  ],
+  [
+   "Somaliland",
+   "683ddd3f36dbc90b7804755f"
+  ],
+  [
+   "Sorlandet",
+   "6813b7069403bc4170a5d834"
+  ],
+  [
+   "Souss-Massa",
+   "6813b7099403bc4170a5d95d"
+  ],
+  [
+   "South Australia",
+   "6813b70b9403bc4170a5da6b"
+  ],
+  [
+   "South Georgia",
+   "696a81f5882256e1db118228"
+  ],
+  [
+   "South Island",
+   "6813b70b9403bc4170a5da7d"
+  ],
+  [
+   "South Lebanon",
+   "683ddd3e36dbc90b780474e2"
+  ],
+  [
+   "South Suriname",
+   "6813b70b9403bc4170a5dab0"
+  ],
+  [
+   "South-Eastern Ukraine",
+   "6813b70a9403bc4170a5d9f3"
+  ],
+  [
+   "Southeast Nigeria",
+   "683ddd3e36dbc90b7804752b"
+  ],
+  [
+   "Southeastern Afghanistan",
+   "6813b70d9403bc4170a5db94"
+  ],
+  [
+   "Southeastern Anatolia",
+   "6813b7059403bc4170a5d7aa"
+  ],
+  [
+   "Southeastern Angola",
+   "683ddd3d36dbc90b78047463"
+  ],
+  [
+   "Southeastern Botswana",
+   "6873d11694e6b3b7989a4c7d"
+  ],
+  [
+   "Southeastern C\u00f4te d'Ivoire",
+   "6873d11694e6b3b7989a4c89"
+  ],
+  [
+   "Southeastern England",
+   "6813b7039403bc4170a5d6b1"
+  ],
+  [
+   "Southeastern Estonia",
+   "6813b7059403bc4170a5d777"
+  ],
+  [
+   "Southeastern France",
+   "6813b7049403bc4170a5d6c6"
+  ],
+  [
+   "Southeastern Liberia",
+   "6873d11794e6b3b7989a4ccf"
+  ],
+  [
+   "Southeastern Libya",
+   "6813b7099403bc4170a5d97e"
+  ],
+  [
+   "Southeastern Mauritania",
+   "6873d11494e6b3b7989a4bed"
+  ],
+  [
+   "Southeastern Nepal",
+   "6873d11794e6b3b7989a4ce3"
+  ],
+  [
+   "Southeastern USA",
+   "6813b7069403bc4170a5d801"
+  ],
+  [
+   "Southern Albania",
+   "6813b7069403bc4170a5d7e3"
+  ],
+  [
+   "Southern Belize",
+   "6813b70c9403bc4170a5daf8"
+  ],
+  [
+   "Southern Benin",
+   "6873d11594e6b3b7989a4c71"
+  ],
+  [
+   "Southern Bosnia",
+   "6813b7079403bc4170a5d86d"
+  ],
+  [
+   "Southern Cameroon",
+   "6873d11694e6b3b7989a4c98"
+  ],
+  [
+   "Southern Cape",
+   "683ddd3f36dbc90b780475a4"
+  ],
+  [
+   "Southern China",
+   "6813b7079403bc4170a5d8b2"
+  ],
+  [
+   "Southern Congo",
+   "6873d11594e6b3b7989a4c3b"
+  ],
+  [
+   "Southern District",
+   "683ddd3d36dbc90b78047497"
+  ],
+  [
+   "Southern Finland",
+   "6813b7079403bc4170a5d85b"
+  ],
+  [
+   "Southern Greenland",
+   "6813b70b9403bc4170a5da95"
+  ],
+  [
+   "Southern Guatemala",
+   "6813b70c9403bc4170a5daf2"
+  ],
+  [
+   "Southern Iceland",
+   "683ddd3f36dbc90b780475bc"
+  ],
+  [
+   "Southern Iraq",
+   "683ddd3e36dbc90b780474a3"
+  ],
+  [
+   "Southern Lesotho",
+   "6873d11594e6b3b7989a4c59"
+  ],
+  [
+   "Southern Malawi",
+   "6873d11794e6b3b7989a4cdd"
+  ],
+  [
+   "Southern Mexico",
+   "6813b7069403bc4170a5d80a"
+  ],
+  [
+   "Southern Mongolia",
+   "683ddd3e36dbc90b780474fb"
+  ],
+  [
+   "Southern Russian Steppe",
+   "6813b70a9403bc4170a5da11"
+  ],
+  [
+   "Southern South Korea",
+   "6813b7079403bc4170a5d8be"
+  ],
+  [
+   "Southern Taiwan",
+   "6813b7089403bc4170a5d8cd"
+  ],
+  [
+   "Southern Tanzania",
+   "6873d11894e6b3b7989a4d1d"
+  ],
+  [
+   "Southern USA",
+   "6813b7069403bc4170a5d7fe"
+  ],
+  [
+   "Southwestern Afghanistan",
+   "6813b70d9403bc4170a5db8e"
+  ],
+  [
+   "Southwestern Angola",
+   "683ddd3d36dbc90b78047466"
+  ],
+  [
+   "Southwestern Bolivia",
+   "6813b7099403bc4170a5d9a2"
+  ],
+  [
+   "Southwestern Central Africa",
+   "6873d11594e6b3b7989a4c35"
+  ],
+  [
+   "Southwestern C\u00f4te d'Ivoire",
+   "6873d11694e6b3b7989a4c8c"
+  ],
+  [
+   "Southwestern England",
+   "6813b7039403bc4170a5d6a8"
+  ],
+  [
+   "Southwestern Libya",
+   "6813b7099403bc4170a5d978"
+  ],
+  [
+   "Southwestern Nepal",
+   "6873d11794e6b3b7989a4ce6"
+  ],
+  [
+   "Southwestern USA",
+   "6813b7069403bc4170a5d7fb"
+  ],
+  [
+   "Stung Treng",
+   "683ddd3e36dbc90b780474c4"
+  ],
+  [
+   "Styria",
+   "6813b7049403bc4170a5d708"
+  ],
+  [
+   "Styria Carinthia",
+   "6813b7049403bc4170a5d738"
+  ],
+  [
+   "Sulawesi",
+   "6813b7089403bc4170a5d8d9"
+  ],
+  [
+   "Sumatra",
+   "6813b7089403bc4170a5d8e5"
+  ],
+  [
+   "Suvalkija",
+   "6813b7059403bc4170a5d75f"
+  ],
+  [
+   "Svalbard",
+   "696a81f5882256e1db11820e"
+  ],
+  [
+   "S\u00e3o Paulo",
+   "6813b7089403bc4170a5d8fd"
+  ],
+  [
+   "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
+   "6873d11794e6b3b7989a4cf5"
+  ],
+  [
+   "S\u00e9gou & Mopti",
+   "6873d11394e6b3b7989a4bdb"
+  ],
+  [
+   "Tabuk",
+   "6813b70c9403bc4170a5db43"
+  ],
+  [
+   "Tambacounda",
+   "6873d11494e6b3b7989a4bf9"
+  ],
+  [
+   "Tashkent",
+   "6813b70c9403bc4170a5db0d"
+  ],
+  [
+   "Tasmania",
+   "6813b70b9403bc4170a5da77"
+  ],
+  [
+   "Tataouine",
+   "6813b7099403bc4170a5d996"
+  ],
+  [
+   "Tbilisi",
+   "683ddd3d36dbc90b78047491"
+  ],
+  [
+   "Tehran",
+   "6813b70b9403bc4170a5dad1"
+  ],
+  [
+   "Temuco",
+   "6813b7089403bc4170a5d93c"
+  ],
+  [
+   "Tete",
+   "683ddd3e36dbc90b7804751f"
+  ],
+  [
+   "Thessaly",
+   "6813b7059403bc4170a5d7c2"
+  ],
+  [
+   "Thimphu",
+   "683ddd3d36dbc90b78047473"
+  ],
+  [
+   "Tibesti",
+   "6873d11894e6b3b7989a4d07"
+  ],
+  [
+   "Tibet",
+   "6813b7079403bc4170a5d8a0"
+  ],
+  [
+   "Ticons Grisons",
+   "6813b7039403bc4170a5d68d"
+  ],
+  [
+   "Tigray and Afar",
+   "683ddd3d36dbc90b78047485"
+  ],
+  [
+   "Tillab\u00e9ri and Tahoua",
+   "6873d11494e6b3b7989a4c05"
+  ],
+  [
+   "Timor-Leste",
+   "6873d11594e6b3b7989a4c50"
+  ],
+  [
+   "Tiris Zemmour",
+   "6873d11494e6b3b7989a4bf3"
+  ],
+  [
+   "Toamasina",
+   "683ddd3f36dbc90b780475d7"
+  ],
+  [
+   "Togo",
+   "6873d11894e6b3b7989a4d0d"
+  ],
+  [
+   "Tohoku",
+   "6813b7079403bc4170a5d882"
+  ],
+  [
+   "Toliara",
+   "683ddd3f36dbc90b780475d1"
+  ],
+  [
+   "Tombouctou",
+   "6873d11394e6b3b7989a4bd2"
+  ],
+  [
+   "Transdanubia",
+   "6813b7049403bc4170a5d729"
+  ],
+  [
+   "Transural Gate",
+   "6813b70a9403bc4170a5da20"
+  ],
+  [
+   "Transylvania",
+   "6813b7059403bc4170a5d750"
+  ],
+  [
+   "Trashigang",
+   "683ddd3d36dbc90b78047476"
+  ],
+  [
+   "Trinidad & Tobago",
+   "6813b70b9403bc4170a5dab6"
+  ],
+  [
+   "Trujillo",
+   "6813b7089403bc4170a5d942"
+  ],
+  [
+   "Tunis",
+   "6813b7099403bc4170a5d990"
+  ],
+  [
+   "Tunisian Oasis",
+   "6813b7099403bc4170a5d993"
+  ],
+  [
+   "Turkish Mediterranean Coast",
+   "6813b7059403bc4170a5d7a7"
+  ],
+  [
+   "Turkistan",
+   "6813b70d9403bc4170a5db6a"
+  ],
+  [
+   "Tver & Smolensk",
+   "696a81f5882256e1db11821a"
+  ],
+  [
+   "Tyrol & Salzburg",
+   "6813b7049403bc4170a5d70e"
+  ],
+  [
+   "Ulaanbaatar",
+   "683ddd3e36dbc90b780474fe"
+  ],
+  [
+   "Ulster",
+   "6813b7069403bc4170a5d82e"
+  ],
+  [
+   "Ulytau",
+   "6813b70d9403bc4170a5db58"
+  ],
+  [
+   "Upper Nile",
+   "6813b70a9403bc4170a5da4d"
+  ],
+  [
+   "Upper egypt",
+   "6813b7099403bc4170a5d972"
+  ],
+  [
+   "Uppland",
+   "6813b7069403bc4170a5d7e0"
+  ],
+  [
+   "Ushuaia",
+   "6813b7089403bc4170a5d915"
+  ],
+  [
+   "Utkala",
+   "6813b7099403bc4170a5d9cf"
+  ],
+  [
+   "Uttar Pradesh",
+   "6813b70a9403bc4170a5d9db"
+  ],
+  [
+   "Vanuatu",
+   "6873d11594e6b3b7989a4c5f"
+  ],
+  [
+   "Vatican City",
+   "69614d2720e5425d54d00c56"
+  ],
+  [
+   "Venezuelan Guyana",
+   "6813b7099403bc4170a5d9c0"
+  ],
+  [
+   "Veracruz & Tabasco",
+   "6813b7069403bc4170a5d80d"
+  ],
+  [
+   "Vestlandet",
+   "6813b7069403bc4170a5d837"
+  ],
+  [
+   "Victoria",
+   "6813b70b9403bc4170a5da74"
+  ],
+  [
+   "Vidzeme",
+   "6813b7059403bc4170a5d765"
+  ],
+  [
+   "Vientiane",
+   "683ddd3e36dbc90b780474d6"
+  ],
+  [
+   "Visayas",
+   "6813b7089403bc4170a5d8eb"
+  ],
+  [
+   "Vitebsk",
+   "6813b70a9403bc4170a5da56"
+  ],
+  [
+   "Vojvodina",
+   "6813b7059403bc4170a5d79b"
+  ],
+  [
+   "Vologda & Kostroma",
+   "6813b70a9403bc4170a5da1a"
+  ],
+  [
+   "Wales",
+   "6813b7039403bc4170a5d6a5"
+  ],
+  [
+   "Wallonia",
+   "6813b7039403bc4170a5d67f"
+  ],
+  [
+   "West Bank",
+   "683ddd3f36dbc90b7804754f"
+  ],
+  [
+   "West Guyana",
+   "6813b70b9403bc4170a5daa1"
+  ],
+  [
+   "West Kazakhstan",
+   "6813b70d9403bc4170a5db67"
+  ],
+  [
+   "Western Afghanistan",
+   "6813b70d9403bc4170a5db8b"
+  ],
+  [
+   "Western Algerian Sahara",
+   "696a81f5882256e1db118218"
+  ],
+  [
+   "Western Australia",
+   "6813b70b9403bc4170a5da65"
+  ],
+  [
+   "Western Burkina Faso",
+   "6873d11594e6b3b7989a4c6b"
+  ],
+  [
+   "Western Cameroon",
+   "6873d11694e6b3b7989a4c95"
+  ],
+  [
+   "Western Chad",
+   "6873d11894e6b3b7989a4d0a"
+  ],
+  [
+   "Western Costa Rica",
+   "6813b70b9403bc4170a5dad7"
+  ],
+  [
+   "Western Cuba",
+   "6813b70b9403bc4170a5da83"
+  ],
+  [
+   "Western Czechia",
+   "6813b7059403bc4170a5d744"
+  ],
+  [
+   "Western El Salvador",
+   "6813b70c9403bc4170a5dae9"
+  ],
+  [
+   "Western Estonia",
+   "6813b7059403bc4170a5d774"
+  ],
+  [
+   "Western Finland",
+   "6813b7079403bc4170a5d85e"
+  ],
+  [
+   "Western Ghana",
+   "6873d11494e6b3b7989a4be4"
+  ],
+  [
+   "Western Honduras",
+   "6813b70c9403bc4170a5daef"
+  ],
+  [
+   "Western Iceland",
+   "683ddd3f36dbc90b780475bf"
+  ],
+  [
+   "Western Iran",
+   "6813b70b9403bc4170a5dacb"
+  ],
+  [
+   "Western Kenya",
+   "6813b70a9403bc4170a5da3b"
+  ],
+  [
+   "Western Liberia",
+   "6873d11794e6b3b7989a4cd2"
+  ],
+  [
+   "Western Mashonaland",
+   "6873d11894e6b3b7989a4d38"
+  ],
+  [
+   "Western Mauritania",
+   "6873d11494e6b3b7989a4bf6"
+  ],
+  [
+   "Western Mongolia",
+   "683ddd3e36dbc90b78047501"
+  ],
+  [
+   "Western Nicaragua",
+   "6813b70c9403bc4170a5dae3"
+  ],
+  [
+   "Western Panama",
+   "6813b70c9403bc4170a5dadd"
+  ],
+  [
+   "Western Serbia",
+   "6813b7059403bc4170a5d795"
+  ],
+  [
+   "Western Siberia",
+   "6813b70a9403bc4170a5da0b"
+  ],
+  [
+   "Western Slovakia",
+   "6813b7069403bc4170a5d840"
+  ],
+  [
+   "Western South Korea",
+   "6813b7079403bc4170a5d8c4"
+  ],
+  [
+   "Western Sri Lanka",
+   "683ddd3f36dbc90b780475c8"
+  ],
+  [
+   "Western Tanzania",
+   "6873d11894e6b3b7989a4d20"
+  ],
+  [
+   "Western Uganda",
+   "6873d11494e6b3b7989a4c17"
+  ],
+  [
+   "Western Uzbekistan",
+   "6813b70c9403bc4170a5db16"
+  ],
+  [
+   "Western Venezuela",
+   "6813b7099403bc4170a5d9c3"
+  ],
+  [
+   "Western Volyn",
+   "6813b70a9403bc4170a5d9fc"
+  ],
+  [
+   "Western Zambia",
+   "6873d11894e6b3b7989a4d2f"
+  ],
+  [
+   "Xinjiang",
+   "6813b7079403bc4170a5d89d"
+  ],
+  [
+   "Yangon",
+   "683ddd3e36dbc90b780474f2"
+  ],
+  [
+   "Yaound\u00e9",
+   "6873d11694e6b3b7989a4c9b"
+  ],
+  [
+   "Yucatan Peninsula",
+   "6813b7069403bc4170a5d807"
+  ],
+  [
+   "Yunnan Guizhou",
+   "6813b7079403bc4170a5d8b5"
+  ],
+  [
+   "Zacatecas & San Luis Potosi",
+   "6813b7069403bc4170a5d813"
+  ],
+  [
+   "Zakarpattia",
+   "6813b70a9403bc4170a5da05"
+  ],
+  [
+   "Zambezia & Nampula",
+   "683ddd3e36dbc90b78047522"
+  ],
+  [
+   "Zarqa",
+   "683ddd3e36dbc90b780474b8"
+  ],
+  [
+   "Zealand",
+   "6813b7069403bc4170a5d7cb"
+  ],
+  [
+   "Zemgale & Latgale",
+   "6813b7059403bc4170a5d76b"
+  ],
+  [
+   "Zilina & Banska Bystrica",
+   "6813b7069403bc4170a5d843"
+  ],
+  [
+   "Zinder and Diffa",
+   "6873d11494e6b3b7989a4c08"
+  ],
+  [
+   "Zurich",
+   "6813b7039403bc4170a5d68a"
+  ],
+  [
+   "\u00c9quateur",
+   "6873d11494e6b3b7989a4c23"
+  ]
+ ]
+}

@@ -56,6 +56,37 @@ def load_recipes(api_call, log_callback, fallback):
     }
 
 
+def price_row(recipe, book_prices, live_prices, use_book, total_bonus, income_tax_rate):
+    """Prices and margins for one product at one place.
+
+    Shared by the region pass and the v0.27 product-only pass so the two can
+    never drift apart. Goods sell into the bid, raw materials are bought at the
+    ask when use_book is set.
+    """
+    good_quote = book_prices.get(recipe['good'], {}) if use_book else {}
+    raw_goods_price = good_quote.get('bid') or live_prices.get(recipe['good'], 0)
+
+    first_raw = next(iter(recipe['needs']), None)
+    price_of_rm = round(live_prices.get(first_raw, 0), 3) if first_raw else 0
+
+    def _raw_price(code):
+        quote = book_prices.get(code, {}) if use_book else {}
+        return quote.get('ask') or live_prices.get(code, 0)
+
+    margin = production_margin(raw_goods_price, recipe['needs'], _raw_price, recipe['pp'])
+    raw_profit = margin * (1 + (total_bonus / 100))
+    raw_old_wages = margin * (1 + ((total_bonus + 10) / 100))
+
+    return {
+        'Price of Goods': round(raw_goods_price, 3),
+        'Price of Raw Material': price_of_rm,
+        'Price of Production': round(margin, 3),
+        'Profit per PP': round(raw_profit, 3),
+        'Old workers top wages': round(raw_old_wages, 3),
+        'Top wages after tax': round(raw_old_wages * (1 - (income_tax_rate / 100)), 3),
+    }
+
+
 def fetch_book_prices(api_call, log_callback, item_codes):
     """Best bid/ask per item from the order book (one call per item).
 
@@ -325,32 +356,14 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
             recipe = recipes.get(bonus_source.lower())
 
             if recipe:
-                # Goods sell into the bid, raw materials are bought from the ask.
-                # With use_book we use real book quotes; otherwise the game price.
-                good_quote = book_prices.get(recipe['good'], {}) if use_book else {}
-                raw_goods_price = good_quote.get('bid') or live_prices.get(recipe['good'], 0)
-                price_of_goods = round(raw_goods_price, 3)
-
-                # single raw material kept for the CSV column / chart compatibility
-                first_raw = next(iter(recipe['needs']), None)
-                price_of_rm = round(live_prices.get(first_raw, 0), 3) if first_raw else 0
-
-                def _raw_price(code):
-                    quote = book_prices.get(code, {}) if use_book else {}
-                    return quote.get('ask') or live_prices.get(code, 0)
-
-                raw_production_price = production_margin(
-                    raw_goods_price, recipe['needs'], _raw_price, recipe['pp'])
-                price_of_production = round(raw_production_price, 3)
-
-                raw_profit = raw_production_price * (1 + (total_bonus / 100))
-                profit_per_pp = round(raw_profit, 3)
-
-                raw_old_wages = raw_production_price * (1 + ((total_bonus + 10) / 100))
-                old_workers_top_wages = round(raw_old_wages, 3)
-
-                raw_top_wages = raw_old_wages * (1 - (income_tax_rate / 100))
-                top_wages_after_tax = round(raw_top_wages, 3)
+                priced = price_row(recipe, book_prices, live_prices, use_book,
+                                   total_bonus, income_tax_rate)
+                price_of_goods = priced['Price of Goods']
+                price_of_rm = priced['Price of Raw Material']
+                price_of_production = priced['Price of Production']
+                profit_per_pp = priced['Profit per PP']
+                old_workers_top_wages = priced['Old workers top wages']
+                top_wages_after_tax = priced['Top wages after tax']
             else:
                 price_of_goods = price_of_rm = price_of_production = profit_per_pp = old_workers_top_wages = top_wages_after_tax = 0
             
@@ -372,6 +385,29 @@ def run_warera_analysis(api_key, log_callback, done_callback, use_book=False):
 
         if not combined_extracted_data:
             raise RuntimeError("No region data returned by the API; nothing to write.")
+
+        # v0.27 (Oct 2026) removed the whole regional bonus system: deposits are
+        # off, strategic resources no longer boost production, country
+        # specialisation and party ethics are gone. Every region then resolves to
+        # bonus_source "None" and the old code dropped every row, shipping an
+        # empty report. In that world the only meaningful ranking is per product,
+        # because a good can be made anywhere at the same margin.
+        if all(str(r['Bonus Source']).lower() == 'none' for r in combined_extracted_data):
+            log_callback("ℹ️ No regional bonus system (v0.27+): ranking products, not regions")
+            combined_extracted_data = []
+            for key, recipe in sorted(recipes.items()):
+                priced = price_row(recipe, book_prices, live_prices, use_book, 0, 0)
+                combined_extracted_data.append({
+                    'Region Name': 'Semua region', 'Region Deposit': 'None',
+                    'Country Name': 'Semua', 'Specialisation': 'None',
+                    'Ruling Party Name': 'None', 'Party Industrialism': 0,
+                    'Income Tax Rate': 0,
+                    'Gold': 0, 'Rare Earth': 0, 'Coal': 0, 'Lithium': 0,
+                    'Diamonds': 0, 'Uranium': 0,
+                    'SR Bonus': 0, 'Deposit Bonus': 0, 'Ethics Bonus': 0,
+                    'Total Bonus': 0, 'Bonus Source': recipe['good'],
+                    **priced,
+                })
 
         with open('extracted_countries.csv', 'w', newline='', encoding='utf-8') as csvfile:
             fieldnames = list(combined_extracted_data[0].keys())

@@ -53,6 +53,11 @@ def main():
 
     df = pd.read_csv(table_path)
     df = df[df["Profit per PP"] > 0]
+    # v0.27 removed regional bonuses: the table then holds one row per product
+    # ("Semua region") and moving a factory buys nothing. Detect it so the advice
+    # stops suggesting moves that no longer change any margin.
+    product_only = df[df["Region Name"] == "Semua region"]
+    no_region_bonus = len(product_only) == len(df)
 
     # region -> its own product and profit/PP (the bonus only applies to that product)
     by_region = df.set_index("Region Name")
@@ -99,7 +104,16 @@ def main():
             profit_pp = float(r["Profit per PP"]) if item == bonus_product else base_margin(item)
             wage = float(r["Top wages after tax"])
         else:
-            bonus, bonus_product, profit_pp, wage = 0.0, None, base_margin(item), 0.0
+            # v0.27+ has no regional bonuses, so the table is one row per product
+            # and a company's own region never appears in it. Match on the item
+            # instead of silently falling back to the lagging game price.
+            match = product_only[product_only["Bonus Source"].str.lower() == item.lower()]
+            if len(match):
+                bonus, bonus_product = 0.0, item
+                profit_pp = float(match.iloc[0]["Profit per PP"])
+                wage = float(match.iloc[0]["Top wages after tax"])
+            else:
+                bonus, bonus_product, profit_pp, wage = 0.0, None, base_margin(item), 0.0
 
         if profit_pp is None:
             continue
@@ -118,9 +132,9 @@ def main():
         max_workers = upgrades["breakRoom"]["levels"][
             str((c.get("activeUpgradeLevels") or {}).get("breakRoom", 1))]["stats"]["maxWorkers"]
 
-        # 1) same item, best region that actually bonuses it
+        # 1) same item, best region that actually bonuses it (dead after v0.27)
         same_item = by_product[(by_product["Bonus Source"] == item) & (by_product["Region Name"] != rname)]
-        move = same_item.iloc[0] if len(same_item) else None
+        move = None if no_region_bonus or not len(same_item) else same_item.iloc[0]
 
         # 2) same region, switch to the product the region actually bonuses
         switch = None
@@ -151,7 +165,14 @@ def main():
                 "concrete": cost_item,
                 "gain": (switch[1] - profit_pp) * pp_day,
             })
-        if best_any["Bonus Source"] != item or best_any["Region Name"] != rname:
+        if no_region_bonus and best_any["Bonus Source"].lower() != item.lower():
+            # post-v0.27: location buys nothing, only the product does
+            options.append({
+                "label": f"ganti produk jadi {best_any['Bonus Source']}",
+                "concrete": cost_item,
+                "gain": (float(best_any["Profit per PP"]) - profit_pp) * pp_day,
+            })
+        if best_any["Bonus Source"] != item and not no_region_bonus:
             options.append({
                 "label": f"pindah ke {best_any['Region Name']} + ganti produk jadi {best_any['Bonus Source']}",
                 "concrete": cost_move + cost_item,
